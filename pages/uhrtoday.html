@@ -78,7 +78,6 @@ body::after {
   box-shadow:
     0 0 20px #7f1d1d,
     inset 0 0 40px rgba(255,0,0,0.2);
-  position: relative;
 }
 
 .warning-text {
@@ -146,26 +145,45 @@ body::after {
   <a href="../index.html" class="home-link">RETURN</a>
 </div>
 
-<!-- Use absolute path to avoid folder issues -->
-<audio id="hum" src="https://www.unitedhollowrepublic.com/audio/roomHum.wav" loop preload="auto"></audio>
-
 <script>
 const targetDate = new Date("March 30, 2026 00:00:00").getTime();
 const timer = document.getElementById("timer");
-const hum = document.getElementById("hum");
 const glitch = document.getElementById("glitch");
 
 let audioContext;
 let tickingEnabled = false;
+let humBuffer;
+let humSource;
 
-/* Stronger, more reliable audio start */
+/* Load hum file into buffer */
+async function loadHum() {
+  const response = await fetch("https://www.unitedhollowrepublic.com/audio/roomHum.wav");
+  const arrayBuffer = await response.arrayBuffer();
+  humBuffer = await audioContext.decodeAudioData(arrayBuffer);
+}
+
+/* Start seamless loop */
+function startHumLoop() {
+  humSource = audioContext.createBufferSource();
+  humSource.buffer = humBuffer;
+  humSource.loop = true;
+
+  const gainNode = audioContext.createGain();
+  gainNode.gain.value = 0.45;
+
+  humSource.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+
+  humSource.start(0);
+}
+
+/* Start audio system */
 async function startAudio() {
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
     await audioContext.resume();
-
-    hum.volume = 0.45;
-    hum.play().catch(e => console.log("Hum playback blocked:", e));
+    await loadHum();
+    startHumLoop();
 
     tickingEnabled = true;
     document.removeEventListener("click", startAudio);
@@ -183,7 +201,7 @@ function playTick() {
   const filter = audioContext.createBiquadFilter();
 
   osc.type = "square";
-  osc.frequency.setValueAtTime(85, audioContext.currentTime); // lower tone
+  osc.frequency.setValueAtTime(85, audioContext.currentTime);
 
   filter.type = "lowpass";
   filter.frequency.setValueAtTime(220, audioContext.currentTime);
@@ -202,9 +220,7 @@ function playTick() {
 /* Background glitch flicker */
 function randomGlitch() {
   glitch.style.opacity = Math.random() * 0.25;
-  setTimeout(() => {
-    glitch.style.opacity = 0;
-  }, 100);
+  setTimeout(() => glitch.style.opacity = 0, 100);
 }
 setInterval(randomGlitch, 2500 + Math.random() * 3000);
 
