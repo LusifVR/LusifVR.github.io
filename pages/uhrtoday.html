@@ -81,23 +81,6 @@ body::after {
   position: relative;
 }
 
-/* Chromatic glitch fringe */
-.container::before,
-.container::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  right: 0;
-  opacity: 0.05;
-}
-
-h1 {
-  font-size: 1.5rem;
-  letter-spacing: 4px;
-  margin-bottom: 1rem;
-  color: #ff6b6b;
-}
-
 .warning-text {
   font-size: 1.2rem;
   letter-spacing: 5px;
@@ -136,13 +119,6 @@ h1 {
   100% { opacity: 0.8; }
 }
 
-.subtext {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  color: #aa2a2a;
-}
-
 .home-link {
   display: inline-block;
   margin-top: 2.5rem;
@@ -165,15 +141,13 @@ h1 {
 <div class="glitch-overlay" id="glitch"></div>
 
 <div class="container">
-  <h1></h1>
   <div class="warning-text">GET READY TO FIGHT</div>
   <div id="timer">--:--:--:--</div>
-  <div class="subtext"></div>
   <a href="../index.html" class="home-link">RETURN</a>
 </div>
 
-<!-- Ambient Hum -->
-<audio id="hum" src="audio/roomHum.wav" loop></audio>
+<!-- Use absolute path to avoid folder issues -->
+<audio id="hum" src="https://www.unitedhollowrepublic.com/audio/roomHum.wav" loop preload="auto"></audio>
 
 <script>
 const targetDate = new Date("March 30, 2026 00:00:00").getTime();
@@ -184,17 +158,23 @@ const glitch = document.getElementById("glitch");
 let audioContext;
 let tickingEnabled = false;
 
-/* Enable audio after first click */
-document.addEventListener("click", () => {
+/* Stronger, more reliable audio start */
+async function startAudio() {
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    hum.volume = 0.4;
-    hum.play();
-    tickingEnabled = true;
-  }
-}, { once: true });
+    await audioContext.resume();
 
-/* INDUSTRIAL LOW METAL TICK */
+    hum.volume = 0.45;
+    hum.play().catch(e => console.log("Hum playback blocked:", e));
+
+    tickingEnabled = true;
+    document.removeEventListener("click", startAudio);
+  }
+}
+
+document.addEventListener("click", startAudio);
+
+/* Heavy Industrial Tick */
 function playTick() {
   if (!tickingEnabled) return;
 
@@ -203,30 +183,30 @@ function playTick() {
   const filter = audioContext.createBiquadFilter();
 
   osc.type = "square";
-  osc.frequency.setValueAtTime(120, audioContext.currentTime);
+  osc.frequency.setValueAtTime(85, audioContext.currentTime); // lower tone
 
   filter.type = "lowpass";
-  filter.frequency.setValueAtTime(300, audioContext.currentTime);
+  filter.frequency.setValueAtTime(220, audioContext.currentTime);
 
-  gain.gain.setValueAtTime(0.15, audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15);
+  gain.gain.setValueAtTime(0.25, audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.2);
 
   osc.connect(filter);
   filter.connect(gain);
   gain.connect(audioContext.destination);
 
   osc.start();
-  osc.stop(audioContext.currentTime + 0.15);
+  osc.stop(audioContext.currentTime + 0.2);
 }
 
 /* Background glitch flicker */
 function randomGlitch() {
-  glitch.style.opacity = Math.random() * 0.2;
+  glitch.style.opacity = Math.random() * 0.25;
   setTimeout(() => {
     glitch.style.opacity = 0;
-  }, 80);
+  }, 100);
 }
-setInterval(randomGlitch, 3000 + Math.random() * 4000);
+setInterval(randomGlitch, 2500 + Math.random() * 3000);
 
 function updateCountdown() {
   const now = new Date().getTime();
