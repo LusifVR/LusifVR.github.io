@@ -6,7 +6,6 @@
 <title>UNITED HOLLOW REPUBLIC</title>
 
 <style>
-
 * {
   margin: 0;
   padding: 0;
@@ -14,10 +13,26 @@
   font-family: "Courier New", monospace;
 }
 
+/* ===== BODY + BASE ===== */
 body {
   background-color: #0a0f0d;
   color: #cfd8cf;
   overflow-x: hidden;
+  animation: flicker 4s infinite;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ===== BACKGROUND VIDEO ===== */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -3;
+  filter: brightness(0.35) contrast(1.2);
 }
 
 /* ===== TACTICAL GRID ===== */
@@ -54,15 +69,14 @@ body::after {
   50% { opacity: 1; }
   100% { opacity: 0.99; }
 }
-body {
-  animation: flicker 4s infinite;
-}
 
 /* ===== HEADER ===== */
 header {
   padding: 2rem;
   border-bottom: 3px solid #1e3a8a;
-  background: #0f1713;
+  background: rgba(15,23,19,0.85);
+  position: relative;
+  z-index: 5;
 }
 
 h1 {
@@ -97,6 +111,8 @@ nav a:hover {
 main {
   padding: 3rem 2rem;
   max-width: 1100px;
+  position: relative;
+  z-index: 5;
 }
 
 /* ===== BLUE MILITARY PANELS ===== */
@@ -164,12 +180,19 @@ footer {
   padding: 1.5rem 2rem;
   font-size: 0.8rem;
   color: #5f8fff;
+  position: relative;
+  z-index: 5;
 }
-
 </style>
 </head>
 
 <body>
+
+<!-- BACKGROUND VIDEO -->
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="videos/vrmilsim_webcut.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 <header>
   <h1>UNITED HOLLOW REPUBLIC</h1>
@@ -181,41 +204,22 @@ footer {
   </nav>
 </header>
 
-<audio id="bgAudio" loop>
-  <source src="audio/ambient.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-document.addEventListener("click", function startAudio() {
-  const audio = document.getElementById("bgAudio");
-  audio.play();
-  document.removeEventListener("click", startAudio);
-});
-</script>
-
 <main>
-
   <div class="panel">
     <h2>MILSIM IN VR</h2>
-    <p>
-    Raising the Standard. 
-    </p>
-
+    <p>Raising the Standard.</p>
     <a href="https://discord.gg/UHR" target="_blank" class="cta">JOIN DISCORD</a>
   </div>
 
   <div class="panel">
     <h2>SITE WORK IN PROGRESS</h2>
     <p>
-      KILL BIG CORPO! IM HOSTING MY OWN SHIT!
-      GoDaddy wanted to charge me an additional 26$/month ontop of my already 38$/month
-      And for what? So they can keep asking me for my ID? So they can send me so many emails
-      they get auto marked for spam? Hell nawh.
-
+      KILL BIG CORPO! IM HOSTING MY OWN SHIT!<br>
+      GoDaddy wanted to charge me an additional 26$/month ontop of my already 38$/month.<br>
+      And for what? So they can keep asking me for my ID? So they can send me so many emails they get auto marked for spam? Hell nawh.<br>
       Welcome to the future lads. Time to do things our way.
     </p>
   </div>
-
 </main>
 
 <footer>
