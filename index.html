@@ -13,12 +13,10 @@
   font-family: "Courier New", monospace;
 }
 
-/* ===== BODY + BASE ===== */
 body {
   background-color: #0a0f0d;
   color: #cfd8cf;
   overflow-x: hidden;
-  animation: flicker 4s infinite;
   position: relative;
   min-height: 100vh;
 }
@@ -63,11 +61,20 @@ body::after {
   z-index: 10;
 }
 
-/* subtle flicker */
-@keyframes flicker {
-  0% { opacity: 0.98; }
-  50% { opacity: 1; }
-  100% { opacity: 0.99; }
+/* ===== GLITCH BOOT EFFECT ===== */
+@keyframes glitchBoot {
+  0% { opacity: 0; transform: scale(1.02); }
+  10% { opacity: 0.3; transform: translateX(-5px); }
+  20% { transform: translateX(5px); }
+  30% { transform: translateX(-3px); }
+  40% { transform: translateX(2px); }
+  60% { opacity: 1; transform: scale(1); }
+  100% { opacity: 1; }
+}
+
+@keyframes panelReveal {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== HEADER ===== */
@@ -77,6 +84,7 @@ header {
   background: rgba(15,23,19,0.85);
   position: relative;
   z-index: 5;
+  animation: glitchBoot 1.2s ease-out;
 }
 
 h1 {
@@ -99,7 +107,6 @@ nav a {
   text-decoration: none;
   margin-right: 2rem;
   font-weight: bold;
-  transition: 0.2s;
 }
 
 nav a:hover {
@@ -109,19 +116,29 @@ nav a:hover {
 
 /* ===== MAIN ===== */
 main {
-  padding: 3rem 2rem;
-  max-width: 1100px;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* CENTER PANELS */
+  max-width: 100%;
   position: relative;
   z-index: 5;
 }
 
-/* ===== BLUE MILITARY PANELS ===== */
+/* ===== PANELS ===== */
 .panel {
+  width: 100%;
+  max-width: 800px;
   border: 2px solid #1e40af;
   padding: 2rem;
   margin-bottom: 3rem;
   background: rgba(10, 20, 40, 0.85);
   position: relative;
+  animation: panelReveal 1s ease forwards;
+}
+
+.panel:nth-child(2) {
+  animation-delay: 0.3s;
 }
 
 .panel::before {
@@ -142,21 +159,7 @@ main {
   color: #7fa6ff;
 }
 
-/* status blocks */
-.status-bar {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.status {
-  border: 1px solid #2563eb;
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  color: #a5c4ff;
-}
-
-/* CTA BUTTON */
+/* ===== CTA BUTTON ===== */
 .cta {
   display: inline-block;
   margin-top: 1.5rem;
@@ -182,16 +185,15 @@ footer {
   color: #5f8fff;
   position: relative;
   z-index: 5;
+  text-align: center;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND VIDEO -->
 <video autoplay muted loop playsinline id="bgVideo">
   <source src="videos/vrmilsim_webcut.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
 <header>
@@ -200,7 +202,7 @@ footer {
     <a href="index.html">HOME</a>
     <a href="pages/about.html">ABOUT</a>
     <a href="https://discord.gg/UHR" target="_blank">DISCORD</a>
-    <a href="pages/contact.html">CONTACT</a>
+    <a href="pages/lore.html">LORE</a>
   </nav>
 </header>
 
@@ -216,8 +218,8 @@ footer {
     <p>
       KILL BIG CORPO! IM HOSTING MY OWN SHIT!<br>
       GoDaddy wanted to charge me an additional 26$/month ontop of my already 38$/month.<br>
-      And for what? So they can keep asking me for my ID? So they can send me so many emails they get auto marked for spam? Hell nawh.<br>
-      Welcome to the future lads. Time to do things our way.
+      And for what? So they can keep asking me for my ID? So they can send me so many emails they get auto marked for spam? Hell nawh.<br><br>
+      Welcome to the future lads.<br><br>Time to do things our way.
     </p>
   </div>
 </main>
