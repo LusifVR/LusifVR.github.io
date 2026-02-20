@@ -24,7 +24,7 @@ body {
   position: relative;
 }
 
-/* ===== GRID ===== */
+/* GRID */
 body::before {
   content: "";
   position: fixed;
@@ -36,7 +36,7 @@ body::before {
   z-index: -2;
 }
 
-/* ===== SCANLINES ===== */
+/* SCANLINES */
 body::after {
   content: "";
   position: fixed;
@@ -52,7 +52,6 @@ body::after {
   z-index: 10;
 }
 
-/* ===== CONTAINER ===== */
 .container {
   text-align: center;
   border: 3px solid #7f1d1d;
@@ -61,15 +60,37 @@ body::after {
   box-shadow: 0 0 20px #7f1d1d, inset 0 0 40px rgba(255,0,0,0.2);
 }
 
-/* ===== TITLE ===== */
+/* TITLE */
 h1 {
   font-size: 1.5rem;
   letter-spacing: 4px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: #ff6b6b;
 }
 
-/* ===== TIMER DISPLAY ===== */
+/* WARNING */
+.warning-text {
+  font-size: 1.2rem;
+  letter-spacing: 5px;
+  margin-bottom: 2rem;
+  color: #ff0000;
+  text-shadow:
+    0 0 5px #ff0000,
+    0 0 15px #ff0000,
+    0 0 30px #660000;
+  animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+  0% { opacity: 1; transform: translate(0); }
+  20% { opacity: 0.8; transform: translate(-1px, 1px); }
+  40% { opacity: 1; transform: translate(1px, -1px); }
+  60% { opacity: 0.85; transform: translate(-1px, 0); }
+  80% { opacity: 1; transform: translate(0, 1px); }
+  100% { opacity: 1; transform: translate(0); }
+}
+
+/* TIMER */
 #timer {
   font-size: 3rem;
   letter-spacing: 6px;
@@ -114,7 +135,8 @@ h1 {
 <body>
 
 <div class="container">
-  <h1>GET READY TO FIGHT</h1>
+  <h1></h1>
+  <div class="warning-text">GET READY TO FIGHT</div>
   <div id="timer">--:--:--:--</div>
   <div class="subtext"></div>
   <a href="../index.html" class="home-link">RETURN</a>
@@ -123,6 +145,36 @@ h1 {
 <script>
 const targetDate = new Date("March 30, 2026 00:00:00").getTime();
 const timer = document.getElementById("timer");
+
+let audioContext;
+let tickingEnabled = false;
+
+/* Enable sound after first click (browser autoplay policy) */
+document.addEventListener("click", () => {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    tickingEnabled = true;
+  }
+}, { once: true });
+
+function playTick() {
+  if (!tickingEnabled) return;
+
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.type = "square";
+  oscillator.frequency.setValueAtTime(1000, audioContext.currentTime);
+
+  gain.gain.setValueAtTime(0.05, audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.05);
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + 0.05);
+}
 
 function updateCountdown() {
   const now = new Date().getTime();
@@ -143,6 +195,8 @@ function updateCountdown() {
     String(hours).padStart(2, "0") + ":" +
     String(minutes).padStart(2, "0") + ":" +
     String(seconds).padStart(2, "0");
+
+  playTick();
 }
 
 setInterval(updateCountdown, 1000);
