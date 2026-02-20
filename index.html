@@ -41,7 +41,7 @@ body::before {
   background-image:
     linear-gradient(rgba(40, 60, 120, 0.2) 1px, transparent 1px),
     linear-gradient(90deg, rgba(40, 60, 120, 0.2) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-size: 20px 20px;
   z-index: -2;
 }
 
@@ -61,19 +61,9 @@ body::after {
   z-index: 10;
 }
 
-/* ===== GLITCH BOOT EFFECT ===== */
-@keyframes glitchBoot {
-  0% { opacity: 0; transform: scale(1.02); }
-  10% { opacity: 0.3; transform: translateX(-5px); }
-  20% { transform: translateX(5px); }
-  30% { transform: translateX(-3px); }
-  40% { transform: translateX(2px); }
-  60% { opacity: 1; transform: scale(1); }
-  100% { opacity: 1; }
-}
 
 @keyframes panelReveal {
-  0% { opacity: 0; transform: translateY(30px); }
+  0% { opacity: 0; transform: translateY(50px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
@@ -211,15 +201,20 @@ footer {
     <h2>MILSIM IN VR</h2>
     <p>Raising the Standard.</p>
     <a href="https://discord.gg/UHR" target="_blank" class="cta">JOIN DISCORD</a>
+    <a href="pages/about.html" target="_blank" class="cta">LEARN MORE</a>
   </div>
 
   <div class="panel">
-    <h2>SITE WORK IN PROGRESS</h2>
+    <h2>SITE TRANSFER IN PROGRESS</h2>
     <p>
-      KILL BIG CORPO! IM HOSTING MY OWN SHIT!<br>
-      GoDaddy wanted to charge me an additional 26$/month ontop of my already 38$/month.<br>
-      And for what? So they can keep asking me for my ID? So they can send me so many emails they get auto marked for spam? Hell nawh.<br><br>
-      Welcome to the future lads.<br><br>Time to do things our way.
+      We're now proudly self-hosted.
+      <br>
+      <br>Some pages might not display correctly, but most if not all information is still accessible.
+      <br>
+      <br>Utilize the previous pagename with /pages/ appended before.
+      <br>example: unitedhollowrepublic.com/pages/uplink
+      <br> 
+      <br>Welcome to the future lads.<br><br>Time to do things our way.
     </p>
   </div>
 </main>
