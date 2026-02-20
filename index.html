@@ -181,6 +181,18 @@ footer {
   </nav>
 </header>
 
+<audio id="bgAudio" loop>
+  <source src="audio/ambient.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener("click", function startAudio() {
+  const audio = document.getElementById("bgAudio");
+  audio.play();
+  document.removeEventListener("click", startAudio);
+});
+</script>
+
 <main>
 
   <div class="panel">
