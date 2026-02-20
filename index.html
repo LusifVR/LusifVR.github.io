@@ -1,40 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>United Hollow Republic</title>
-  <meta name="description" content="United Hollow Republic - VR Milsim Community">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNITED HOLLOW REPUBLIC</title>
 
-  <link rel="icon" href="favicon.png">
-  <link rel="stylesheet" href="style.css">
+<style>
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+}
+
+body {
+  background-color: #0a0f0d;
+  color: #cfd8cf;
+  overflow-x: hidden;
+}
+
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(50, 80, 60, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(50, 80, 60, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -2;
+}
+
+/* ===== CRT SCANLINES ===== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.2) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* subtle flicker */
+@keyframes flicker {
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.99; }
+}
+body {
+  animation: flicker 4s infinite;
+}
+
+/* ===== HEADER ===== */
+header {
+  padding: 2rem;
+  border-bottom: 3px solid #355e3b;
+  background: #0f1713;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: 4px;
+  color: #7aa67a;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* glitch hover */
+h1:hover {
+  text-shadow: 2px 0 red, -2px 0 cyan;
+}
+
+nav {
+  margin-top: 1rem;
+}
+
+nav a {
+  color: #9dbf9d;
+  text-decoration: none;
+  margin-right: 2rem;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* ===== MAIN ===== */
+main {
+  padding: 3rem 2rem;
+  max-width: 1100px;
+}
+
+/*  ui panel stuff */
+.panel {
+  border: 2px solid #355e3b;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  background: rgba(15, 25, 20, 0.85);
+  position: relative;
+}
+
+.panel::before {
+  content: "FUCK BIG CORPO! ILL HOST MY OWN DAMN WEBSITE";
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: #0a0f0d;
+  padding: 0 10px;
+  font-size: 0.75rem;
+  color: #5f8f5f;
+}
+
+.panel h2 {
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #9dbf9d;
+}
+
+/* status blocks */
+.status-bar {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.status {
+  border: 1px solid #355e3b;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
+
+/* CTA BUTTON */
+.cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #7aa67a;
+  background: #16241c;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.cta:hover {
+  background: #7aa67a;
+  color: #0a0f0d;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  border-top: 3px solid #355e3b;
+  padding: 1.5rem 2rem;
+  font-size: 0.8rem;
+  color: #567a56;
+}
+
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>United Hollow Republic</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="pages/about.html">About</a>
-      <a href="pages/join.html">Join</a>
-      <a href="pages/contact.html">Contact</a>
-    </nav>
-  </header>
+<header>
+  <h1>UNITED HOLLOW REPUBLIC</h1>
+  <nav>
+    <a href="index.html">HOME</a>
+    <a href="pages/about.html">ABOUT</a>
+    <a href="pages/join.html">JOIN</a>
+    <a href="pages/contact.html">CONTACT</a>
+  </nav>
+</header>
 
-  <main>
-    <section>
-      <h2>Welcome to UHR</h2>
-      <p>
-        The United Hollow Republic is a VR Milsim community hosting daily operations,
-        campaigns, combined arms objectives, and community-driven lore.
-      </p>
-    </section>
-  </main>
+<main>
 
-  <footer>
-    <p>&copy; 2026 United Hollow Republic</p>
-  </footer>
+  <div class="panel">
+    <h2>Operational Command</h2>
+    <p>
+      Structured VR military simulation operations.
+      Persistent campaigns. Combined arms warfare.
+      Tactical immersion and coordinated strategy.
+    </p>
+
+    <div class="status-bar">
+      <div class="status">N/A</div>
+      <div class="status">N/A</div>
+      <div class="status">N/A</div>
+    </div>
+
+    <a href="pages/join.html" class="cta">ENLIST NOW</a>
+  </div>
+
+  <div class="panel">
+    <h2>Active Theater</h2>
+    <p>
+      N/A
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 UNITED HOLLOW REPUBLIC | VR MILSIM
+</footer>
 
 </body>
 </html>
