@@ -7,7 +7,6 @@
 
 <style>
 
-
 * {
   margin: 0;
   padding: 0;
@@ -21,14 +20,14 @@ body {
   overflow-x: hidden;
 }
 
-
+/* ===== TACTICAL GRID ===== */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(50, 80, 60, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(50, 80, 60, 0.15) 1px, transparent 1px);
+    linear-gradient(rgba(40, 60, 120, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(40, 60, 120, 0.2) 1px, transparent 1px);
   background-size: 40px 40px;
   z-index: -2;
 }
@@ -40,8 +39,8 @@ body::after {
   inset: 0;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0,0,0,0.2),
-    rgba(0,0,0,0.2) 1px,
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.25) 1px,
     transparent 1px,
     transparent 3px
   );
@@ -62,19 +61,17 @@ body {
 /* ===== HEADER ===== */
 header {
   padding: 2rem;
-  border-bottom: 3px solid #355e3b;
+  border-bottom: 3px solid #1e3a8a;
   background: #0f1713;
 }
 
 h1 {
   font-size: 2rem;
   letter-spacing: 4px;
-  color: #7aa67a;
+  color: #4f7cff;
   text-transform: uppercase;
-  position: relative;
 }
 
-/* glitch hover */
 h1:hover {
   text-shadow: 2px 0 red, -2px 0 cyan;
 }
@@ -84,7 +81,7 @@ nav {
 }
 
 nav a {
-  color: #9dbf9d;
+  color: #7fa6ff;
   text-decoration: none;
   margin-right: 2rem;
   font-weight: bold;
@@ -102,31 +99,31 @@ main {
   max-width: 1100px;
 }
 
-/*  ui panel stuff */
+/* ===== BLUE MILITARY PANELS ===== */
 .panel {
-  border: 2px solid #355e3b;
+  border: 2px solid #1e40af;
   padding: 2rem;
   margin-bottom: 3rem;
-  background: rgba(15, 25, 20, 0.85);
+  background: rgba(10, 20, 40, 0.85);
   position: relative;
 }
 
 .panel::before {
-  content: "FUCK BIG CORPO! ILL HOST MY OWN DAMN WEBSITE";
+  content: "INDEPENDENT COMMAND NODE";
   position: absolute;
   top: -12px;
   left: 20px;
   background: #0a0f0d;
   padding: 0 10px;
   font-size: 0.75rem;
-  color: #5f8f5f;
+  color: #5f8fff;
 }
 
 .panel h2 {
   margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #9dbf9d;
+  color: #7fa6ff;
 }
 
 /* status blocks */
@@ -137,9 +134,10 @@ main {
 }
 
 .status {
-  border: 1px solid #355e3b;
+  border: 1px solid #2563eb;
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
+  color: #a5c4ff;
 }
 
 /* CTA BUTTON */
@@ -147,8 +145,8 @@ main {
   display: inline-block;
   margin-top: 1.5rem;
   padding: 0.8rem 1.5rem;
-  border: 2px solid #7aa67a;
-  background: #16241c;
+  border: 2px solid #3b82f6;
+  background: #111c33;
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
@@ -156,16 +154,16 @@ main {
 }
 
 .cta:hover {
-  background: #7aa67a;
+  background: #3b82f6;
   color: #0a0f0d;
 }
 
 /* ===== FOOTER ===== */
 footer {
-  border-top: 3px solid #355e3b;
+  border-top: 3px solid #1e3a8a;
   padding: 1.5rem 2rem;
   font-size: 0.8rem;
-  color: #567a56;
+  color: #5f8fff;
 }
 
 </style>
@@ -178,7 +176,7 @@ footer {
   <nav>
     <a href="index.html">HOME</a>
     <a href="pages/about.html">ABOUT</a>
-    <a href="pages/join.html">JOIN</a>
+    <a href="https://discord.gg/UHR" target="_blank">DISCORD</a>
     <a href="pages/contact.html">CONTACT</a>
   </nav>
 </header>
@@ -194,18 +192,19 @@ footer {
     </p>
 
     <div class="status-bar">
-      <div class="status">N/A</div>
-      <div class="status">N/A</div>
-      <div class="status">N/A</div>
+      <div class="status">STATUS: STANDBY</div>
+      <div class="status">THEATER: ACTIVE</div>
+      <div class="status">OPS: WEEKLY</div>
     </div>
 
-    <a href="pages/join.html" class="cta">ENLIST NOW</a>
+    <a href="https://discord.gg/UHR" target="_blank" class="cta">JOIN DISCORD</a>
   </div>
 
   <div class="panel">
     <h2>Active Theater</h2>
     <p>
-      N/A
+      Deployment zones currently classified.
+      Operational briefings available inside Discord.
     </p>
   </div>
 
