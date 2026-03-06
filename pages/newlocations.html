@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Republic Location Network</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body{
+    margin:0;
+    font-family:'Share Tech Mono', monospace;
+    color:#7CFFB2;
+    background:#040404;
+    overflow-x:hidden;
+}
+
+/* MOVING GRID BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(0,255,140,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,140,0.07) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:gridMove 60s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes gridMove{
+    from{background-position:0 0, 0 0;}
+    to{background-position:0 200px, 200px 0;}
+}
+
+/* CRT SCANLINES */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:repeating-linear-gradient(
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0.25) 3px
+    );
+    pointer-events:none;
+    opacity:.35;
+}
+
+/* HEADER */
+
+header{
+    padding:40px;
+    border-bottom:1px solid rgba(124,255,178,0.2);
+}
+
+h1{
+    margin:0;
+    font-size:38px;
+    letter-spacing:3px;
+    text-shadow:0 0 6px rgba(124,255,178,0.6);
+}
+
+.subtitle{
+    color:#4fdc94;
+    margin-top:8px;
+}
+
+/* GRID */
+
+.container{
+    padding:40px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+/* MAP CARD */
+
+.map-card{
+    border:1px solid rgba(124,255,178,0.25);
+    padding:25px;
+    background:rgba(0,0,0,0.65);
+    position:relative;
+    transition:all .25s ease;
+}
+
+.map-card:hover{
+    border-color:#7CFFB2;
+    box-shadow:0 0 18px rgba(124,255,178,0.35);
+    transform:translateY(-4px);
+}
+
+.map-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:30px;
+    height:30px;
+    border-top:2px solid #7CFFB2;
+    border-left:2px solid #7CFFB2;
+}
+
+/* TITLE */
+
+.map-title{
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+/* DESCRIPTION */
+
+.map-desc{
+    color:#9cffc9;
+    line-height:1.5;
+}
+
+/* TAG */
+
+.tag{
+    margin-top:15px;
+    display:inline-block;
+    border:1px solid #4fdc94;
+    padding:4px 10px;
+    font-size:12px;
+    color:#4fdc94;
+}
+
+/* BUTTON */
+
+.link-btn{
+    display:inline-block;
+    margin-top:18px;
+    padding:8px 14px;
+    border:1px solid #7CFFB2;
+    color:#7CFFB2;
+    text-decoration:none;
+    font-size:13px;
+    transition:all .2s ease;
+}
+
+.link-btn:hover{
+    background:#7CFFB2;
+    color:#031a12;
+    box-shadow:0 0 12px rgba(124,255,178,0.6);
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:30px;
+    padding:20px 40px;
+    border-top:1px solid rgba(124,255,178,0.2);
+    color:#3aa86e;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>REPUBLIC LOCATION NETWORK</h1>
+<div class="subtitle">Environment Access Terminal</div>
+</header>
+
+<section class="container">
+
+<div class="map-card">
+<div class="map-title">Shoothouse V3</div>
+<div class="map-desc">
+An interactive weapons range and training environment designed for tactical drills,
+sandbox experimentation, and instructor-led sessions. Includes admin tools,
+dynamic targets, and flexible training scenarios. New tools, timed events, and
+individual tools to improve your shot and run drills at any time.
+</div>
+<div class="tag">Training Environment</div><br>
+<a class="link-btn">Link Available Soon!</a>
+</div>
+
+<div class="map-card">
+<div class="map-title">Havenport</div>
+<div class="map-desc">
+An expansive exploration map located in the Paraq region. Discover hidden
+locations, complete fun missions, interact with activities, and explore
+a living coastal environment. Havenport also features a complete airfield
+and an operational aircraft carrier for aviation exploration and flight
+operations.
+</div>
+<div class="tag">Exploration Zone</div><br>
+<a class="link-btn">Link Available Soon!</a>
+</div>
+
+<div class="map-card">
+<div class="map-title">ATD-12 "Paxan"</div>
+<div class="map-desc">
+Board the Republic Navy's newest fleet ship featuring carrier flight
+operations, aircraft launch systems, and strike missions simulating
+naval aviation deployments. The Paxan also includes functioning ship
+controls, allowing players to interact with and operate key systems
+throughout the vessel.
+</div>
+<div class="tag">Fleet Operations</div><br>
+<a class="link-btn">Link Available Soon!</a>
+</div>
+
+<div class="map-card">
+<div class="map-title">Arx Range</div>
+<div class="map-desc">
+An advanced armored vehicle training world built for tank crews and
+mechanized units. Includes interactive objectives, combat targets,
+maneuver courses, and armored warfare scenarios. Features the new
+armored vehicle platform- including the Cheetah SPAA and the Rhino
+SPG weapons platform.
+</div>
+<div class="tag">Armored Training</div><br>
+<a class="link-btn">Link Available Soon!</a>
+</div>
+
+</section>
+
+<footer>
+SYSTEM STATUS: 4 LOCATIONS ONLINE
+</footer>
+
+</body>
+</html>
