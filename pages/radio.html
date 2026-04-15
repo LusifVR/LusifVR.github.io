@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FQZ</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at center, #111 0%, #050505 100%);
+    color: #ddd;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background 0.3s;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.center {
+    text-align: center;
+}
+
+.freq {
+    font-size: 56px;
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.label {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-bottom: 20px;
+}
+
+input[type=range] {
+    width: 320px;
+    appearance: none;
+    height: 2px;
+    background: #444;
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* signal meter */
+.meter {
+    width: 10px;
+    height: 200px;
+    background: #222;
+    position: relative;
+    overflow: hidden;
+}
+
+.meter-fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(to top, #0f0, #ff0, #f00);
+    transition: height 0.1s;
+}
+
+/* glitch */
+.glitch {
+    animation: glitch 0.1s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(2px,-2px); }
+    50% { transform: translate(-2px,2px); }
+    75% { transform: translate(1px,-1px); }
+    100% { transform: translate(0,0); }
+}
+
+/* secret screen */
+.secret {
+    color: #000;
+    text-align: center;
+}
+
+.secret a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container" id="container">
+    <div class="center">
+        <div class="freq" id="freq">100.0</div>
+        <div class="label">MHz</div>
+        <input type="range" id="slider" min="80" max="250" step="0.5" value="100">
+        <audio id="audio" autoplay loop></audio>
+        <div id="secretBox" style="display:none; margin-top:20px;">
+            <a href="https://example.com" target="_blank">ENTER</a>
+        </div>
+    </div>
+
+    <div class="meter">
+        <div class="meter-fill" id="meterFill"></div>
+    </div>
+</div>
+
+<script>
+const slider = document.getElementById("slider");
+const freqDisplay = document.getElementById("freq");
+const audio = document.getElementById("audio");
+const container = document.getElementById("container");
+const meterFill = document.getElementById("meterFill");
+const secretBox = document.getElementById("secretBox");
+
+const streamPool = [
+    "https://stream.radioparadise.com/global-320",
+    "https://stream.radioparadise.com/rock-320",
+    "https://stream.radioparadise.com/mellow-320",
+    "https://streams.fluxfm.de/Chillhop/mp3-320/streams.fluxfm.de/"
+];
+
+const staticNoise = "https://www.soundjay.com/white-noise/white-noise-01.mp3";
+
+let stations = [];
+
+function generateStations() {
+    stations = [];
+    for (let f = 80; f <= 250; f += 0.5) {
+        if (Math.random() < 0.25) {
+            stations.push({
+                freq: parseFloat(f.toFixed(1)),
+                url: streamPool[Math.floor(Math.random() * streamPool.length)]
+            });
+        }
+    }
+}
+
+generateStations();
+
+let currentSource = "";
+
+function fadeTo(volume) {
+    const step = 0.05;
+    const interval = setInterval(() => {
+        if (Math.abs(audio.volume - volume) < step) {
+            audio.volume = volume;
+            clearInterval(interval);
+        } else {
+            audio.volume += (volume > audio.volume ? step : -step);
+        }
+    }, 30);
+}
+
+function snapFreq(value) {
+    return Math.round(value * 2) / 2;
+}
+
+function getSignalStrength(freq) {
+    let minDiff = Infinity;
+
+    for (let s of stations) {
+        let diff = Math.abs(freq - s.freq);
+        if (diff < minDiff) minDiff = diff;
+    }
+
+    // map distance to strength (0–1)
+    let strength = Math.max(0, 1 - (minDiff / 1.5));
+    return strength;
+}
+
+function tune(freq) {
+    freq = snapFreq(freq);
+    slider.value = freq;
+    freqDisplay.textContent = freq.toFixed(1);
+
+    // secret frequency
+    if (Math.abs(freq - 135.5) < 0.01) {
+        audio.src = "";
+        document.body.style.background = "yellow";
+        container.classList.add("glitch", "secret");
+        secretBox.style.display = "block";
+        meterFill.style.height = "100%";
+        return;
+    } else {
+        container.classList.remove("glitch", "secret");
+        document.body.style.background = "";
+        secretBox.style.display = "none";
+    }
+
+    let strength = getSignalStrength(freq);
+    meterFill.style.height = (strength * 100) + "%";
+
+    let station = stations.find(s => s.freq === freq);
+
+    if (station) {
+        if (currentSource !== station.url) {
+            fadeTo(0);
+            setTimeout(() => {
+                audio.src = station.url;
+                currentSource = station.url;
+                audio.play().catch(() => {});
+                fadeTo(1);
+            }, 200);
+        }
+    } else {
+        if (currentSource !== staticNoise) {
+            fadeTo(0);
+            setTimeout(() => {
+                audio.src = staticNoise;
+                currentSource = staticNoise;
+                audio.play().catch(() => {});
+                fadeTo(0.3);
+            }, 200);
+        }
+    }
+}
+
+slider.addEventListener("input", () => {
+    tune(parseFloat(slider.value));
+});
+
+document.body.addEventListener("click", () => {
+    audio.play().catch(() => {});
+}, { once: true });
+
+tune(parseFloat(slider.value));
+</script>
+
+</body>
+</html>
