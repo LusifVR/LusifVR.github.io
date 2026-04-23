@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ACV-30 (2057) Specifications</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #0a0f14;
+        color: #d7e1e8;
+    }
+
+    /* Subtle scrolling grid */
+    .grid-bg {
+        position: fixed;
+        width: 200%;
+        height: 200%;
+        background-image: 
+            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        animation: scrollGrid 40s linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes scrollGrid {
+        from { transform: translate(0, 0); }
+        to { transform: translate(-60px, -60px); }
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 10%;
+        border-bottom: 1px solid #2a3a44;
+    }
+
+    .title-group {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .flag {
+        width: 50px;
+        height: 32px;
+        object-fit: cover;
+        border: 1px solid #2a3a44;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 26px;
+    }
+
+    header p {
+        margin: 2px 0 0;
+        color: #8aa0ad;
+        font-size: 14px;
+    }
+
+    .main {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 30px;
+        padding: 30px 10%;
+    }
+
+    /* LEFT SIDE */
+    .left-panel img {
+        width: 100%;
+        border: 1px solid #26343d;
+        margin-bottom: 15px;
+    }
+
+    .description {
+        background: #11181f;
+        border: 1px solid #26343d;
+        padding: 20px;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+
+    /* RIGHT SIDE */
+    .right-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .card {
+        background: #11181f;
+        border: 1px solid #26343d;
+        padding: 20px;
+    }
+
+    .card h2 {
+        margin-top: 0;
+        font-size: 16px;
+        border-bottom: 1px solid #2a3a44;
+        padding-bottom: 6px;
+        margin-bottom: 10px;
+    }
+
+    .spec {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid #1d2a31;
+        font-size: 13px;
+    }
+
+    .label {
+        color: #8aa0ad;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header>
+    <div class="title-group">
+        <!-- Replace with your in-game country flag -->
+        <img class="flag" src="https://www.UnitedHollowRepublic.com/images/UHRFLAG.png" alt="Country Flag">
+        <div>
+            <h1>ACV-30 (2057 Upgrade)</h1>
+            <p>Amphibious Combat Vehicle — Technical Specifications</p>
+        </div>
+    </div>
+</header>
+
+<div class="main">
+
+    <!-- LEFT SIDE -->
+    <div class="left-panel">
+        <!-- Replace with your vehicle image -->
+        <img src="acv30.png" alt="ACV-30 Image">
+
+        <div class="description">
+            The ACV-30 (2057 upgrade) represents a next-generation evolution of the amphibious combat vehicle platform. 
+            Designed for rapid deployment across littoral and inland environments, the system integrates improved mobility, 
+            modular protection, and advanced battlefield networking.
+
+            <br><br>
+
+            Enhancements include hybrid propulsion, upgraded survivability systems, and expanded drone integration, 
+            allowing it to operate effectively in both conventional and asymmetric warfare scenarios.
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right-panel">
+
+        <div class="card">
+            <h2>General</h2>
+            <div class="spec"><span class="label">Designation</span><span>ACV-30X</span></div>
+            <div class="spec"><span class="label">Crew</span><span>3 + 10</span></div>
+            <div class="spec"><span class="label">Role</span><span>Amphibious IFV</span></div>
+        </div>
+
+        <div class="card">
+            <h2>Mobility</h2>
+            <div class="spec"><span class="label">Engine</span><span>Hybrid Diesel-Electric</span></div>
+            <div class="spec"><span class="label">Top Speed</span><span>110 km/h</span></div>
+            <div class="spec"><span class="label">Water Speed</span><span>25 knots</span></div>
+        </div>
+
+        <div class="card">
+            <h2>Armament</h2>
+            <div class="spec"><span class="label">Primary</span><span>30mm Autocannon</span></div>
+            <div class="spec"><span class="label">Secondary</span><span>Coaxial MG</span></div>
+            <div class="spec"><span class="label">Missiles</span><span>ATGM</span></div>
+        </div>
+
+        <div class="card">
+            <h2>Protection</h2>
+            <div class="spec"><span class="label">Armor</span><span>Composite + ERA</span></div>
+            <div class="spec"><span class="label">APS</span><span>Active Protection</span></div>
+            <div class="spec"><span class="label">Signature</span><span>Reduced</span></div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
