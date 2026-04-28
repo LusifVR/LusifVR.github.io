@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MTA5 Rhino</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #0a0f14;
+        color: #d7e1e8;
+    }
+
+    .grid-bg {
+        position: fixed;
+        width: 200%;
+        height: 200%;
+        background-image: 
+            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        animation: scrollGrid 40s linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes scrollGrid {
+        from { transform: translate(0, 0); }
+        to { transform: translate(-60px, -60px); }
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 10%;
+        border-bottom: 1px solid #2a3a44;
+    }
+
+    .title-group {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .flag {
+        width: 50px;
+        height: 32px;
+        object-fit: cover;
+        border: 1px solid #2a3a44;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 26px;
+    }
+
+    header p {
+        margin: 2px 0 0;
+        color: #8aa0ad;
+        font-size: 14px;
+    }
+
+    .main {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 30px;
+        padding: 30px 10%;
+    }
+
+    .left-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .left-panel img {
+        width: 100%;
+        border: 1px solid #26343d;
+    }
+
+    .description {
+        background: #11181f;
+        border: 1px solid #26343d;
+        padding: 20px;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+
+    .sub-card {
+        background: #11181f;
+        border: 1px solid #26343d;
+        padding: 20px;
+    }
+
+    .sub-card h2 {
+        margin-top: 0;
+        font-size: 16px;
+        border-bottom: 1px solid #2a3a44;
+        padding-bottom: 6px;
+        margin-bottom: 10px;
+    }
+
+    .right-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .card {
+        background: #11181f;
+        border: 1px solid #26343d;
+        padding: 20px;
+    }
+
+    .card h2 {
+        margin-top: 0;
+        font-size: 16px;
+        border-bottom: 1px solid #2a3a44;
+        padding-bottom: 6px;
+        margin-bottom: 10px;
+    }
+
+    .spec {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid #1d2a31;
+        font-size: 13px;
+    }
+
+    .label {
+        color: #8aa0ad;
+    }
+
+    .footer-panel {
+        margin: 0 10% 30px 10%;
+        background: #11181f;
+        border: 1px solid #26343d;
+        padding: 20px;
+    }
+
+    .footer-panel h2 {
+        margin-top: 0;
+        font-size: 16px;
+        border-bottom: 1px solid #2a3a44;
+        padding-bottom: 6px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header>
+    <div class="title-group">
+        <img class="flag" src="https://www.UnitedHollowRepublic.com/images/UHRFLAG.png">
+        <div>
+            <h1>MTA5 "RHINO"</h1>
+            <p>UNITED HOLLOW REPUBLIC — Main Battle Tank</p>
+        </div>
+    </div>
+</header>
+
+<div class="main">
+
+    <div class="left-panel">
+        <img src="https://www.UnitedHollowRepublic.com/images/placeholderIMAGE.png">
+
+        <div class="description">
+            <h3>Overview</h3>
+            The MTA5 "RHINO" serves as the United Hollow Republic’s premier main battle tank, 
+            representing a new generation of armored warfare built around mobility, survivability, 
+            and networked lethality. Drawing design inspiration from next-generation western MBT 
+            concepts, the Rhino integrates advanced automation and reduced crew requirements 
+            while maintaining overwhelming firepower on the battlefield.
+
+            <br><br>
+
+            The platform features a partially unmanned turret configuration, relocating crew into a 
+            heavily protected armored capsule within the hull. This layout significantly improves 
+            survivability while enabling more compact turret geometry and reduced target profile. 
+            An advanced autoloader system ensures consistent firing rates and allows for expanded 
+            ammunition handling capabilities.
+
+            <br><br>
+
+            At its core, the Rhino utilizes a hybrid propulsion system, combining a high-output 
+            multi-fuel engine with electric drive assistance. This enables rapid acceleration, 
+            silent maneuvering at low speeds, and reduced thermal signature during reconnaissance 
+            or ambush operations.
+
+            <br><br>
+
+            The vehicle is deeply integrated into the Republic’s battlefield network, capable of 
+            sharing targeting data, coordinating with drones, and acting as a command node for 
+            armored formations. Combined with its layered armor, active protection systems, and 
+            adaptive countermeasures, the MTA5 is designed to dominate both conventional and 
+            near-peer combat environments.
+        </div>
+
+        <div class="sub-card">
+            <h2>Ballistics Data</h2>
+            <p style="color:#8aa0ad; font-size:13px;">
+                Not available.
+            </p>
+        </div>
+
+        <div class="sub-card">
+            <h2>Loadouts</h2>
+            <p style="color:#8aa0ad; font-size:13px;">
+                Not available.
+            </p>
+        </div>
+    </div>
+
+    <div class="right-panel">
+
+        <div class="card">
+            <h2>Identifiers</h2>
+            <div class="icon-row">
+                <img src="https://www.UnitedHollowRepublic.com/images/placeholderICON.png">
+                <img src="https://www.UnitedHollowRepublic.com/images/placeholderICON.png">
+                <img src="https://www.UnitedHollowRepublic.com/images/placeholderICON.png">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>General Characteristics</h2>
+            <div class="spec"><span class="label">Designation</span><span>MTA5 "RHINO"</span></div>
+            <div class="spec"><span class="label">Vehicle Type</span><span>Main Battle Tank</span></div>
+            <div class="spec"><span class="label">Crew</span><span>3 (Commander, Gunner, Driver)</span></div>
+            <div class="spec"><span class="label">Combat Weight</span><span>~58–62 tons</span></div>
+            <div class="spec"><span class="label">Operational Role</span><span>Frontline Armored Warfare / Breakthrough Operations</span></div>
+        </div>
+
+        <div class="card">
+            <h2>Mobility & Power</h2>
+            <div class="spec"><span class="label">Engine Type</span><span>Hybrid Multi-Fuel + Electric Assist</span></div>
+            <div class="spec"><span class="label">Power Output</span><span>~1,500 hp</span></div>
+            <div class="spec"><span class="label">Transmission</span><span>Automatic / Digital Drive Control</span></div>
+            <div class="spec"><span class="label">Max Speed</span><span>~45 mph (72 km/h)</span></div>
+            <div class="spec"><span class="label">Operational Range</span><span>~310 miles (500 km)</span></div>
+            <div class="spec"><span class="label">Suspension</span><span>Advanced hydropneumatic system</span></div>
+        </div>
+
+        <div class="card">
+            <h2>Armament Systems</h2>
+            <div class="spec"><span class="label">Primary Weapon</span><span>120mm Smoothbore Cannon (Autoloaded)</span></div>
+            <div class="spec"><span class="label">Ammunition</span><span>APFSDS, HEAT-MP, Programmable Airburst</span></div>
+            <div class="spec"><span class="label">Secondary Weapon</span><span>7.62mm Coaxial MG</span></div>
+            <div class="spec"><span class="label">Remote Weapon</span><span>12.7mm RWS (Commander controlled)</span></div>
+            <div class="spec"><span class="label">Fire Control</span><span>Digital FCS w/ forward assist</span></div>
+            <div class="spec"><span class="label">Hunter-Killer</span><span>Independent commander sight system</span></div>
+        </div>
+
+        <div class="card">
+            <h2>Protection & Survivability</h2>
+            <div class="spec"><span class="label">Armor</span><span>Composite + modular armor arrays</span></div>
+            <div class="spec"><span class="label">Reactive Armor</span><span>Next-gen ERA packages</span></div>
+            <div class="spec"><span class="label">Active Protection</span><span>Hard/Soft-kill APS suite</span></div>
+            <div class="spec"><span class="label">Signature Reduction</span><span>Thermal & radar suppression</span></div>
+            <div class="spec"><span class="label">Countermeasures</span><span>Smoke, IR jamming, electronic warfare</span></div>
+            <div class="spec"><span class="label">Crew Protection</span><span>Armored capsule + blowout ammo storage</span></div>
+        </div>
+
+        <div class="card">
+            <h2>Electronics & Systems</h2>
+            <div class="spec"><span class="label">Battle Network</span><span>Full-spectrum tactical datalink</span></div>
+            <div class="spec"><span class="label">Sensors</span><span>360° EO/IR + thermal imaging</span></div>
+            <div class="spec"><span class="label">Navigation</span><span>GPS / INS integrated system</span></div>
+            <div class="spec"><span class="label">AI Assistance</span><span>Target recognition & threat prioritization</span></div>
+            <div class="spec"><span class="label">Drone Support</span><span>External UAV coordination capability</span></div>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer-panel">
+    <h2>Trivia</h2>
+    <p style="color:#8aa0ad; font-size:13px;">
+        The "RHINO" nickname reflects the vehicle’s role as a breakthrough platform—designed 
+        to absorb punishment and decisively punch through fortified enemy lines.
+    </p>
+</div>
+
+</body>
+</html>
