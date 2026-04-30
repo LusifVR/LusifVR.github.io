@@ -4,162 +4,279 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Louis Simon III - Portfolio</title>
+
 <style>
-    /* Reset and base styles */
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        scroll-behavior: smooth;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: #1db954;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Background grid */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        0deg, #1a1a1a, #1a1a1a 2px, #111 2px, #111 20px
+    ),
+    repeating-linear-gradient(
+        90deg, #1a1a1a, #1a1a1a 2px, #111 2px, #111 20px
+    );
+    animation: scrollGrid 60s linear infinite;
+    z-index: -1;
+}
+
+@keyframes scrollGrid {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-50px, -50px); }
+}
+
+header {
+    text-align: center;
+    padding: 60px 20px 40px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1em;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+/* Sections */
+.section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(20, 20, 20, 0.7);
+    border-radius: 10px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1db954;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* SLIDESHOW */
+.slideshow {
+    position: relative;
+    max-width: 1100px;
+    height: 500px;
+    margin: 40px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 0 25px rgba(0,255,150,0.25);
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide img,
+.slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay panel */
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45%;
+    height: 100%;
+    padding: 40px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: linear-gradient(
+        to left,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0)
+    );
+}
+
+/* Animation setup */
+.slide-overlay h3,
+.slide-overlay p {
+    opacity: 0;
+    transform: translateX(60px);
+}
+
+.slide.active .slide-overlay h3 {
+    animation: slideFade 0.6s ease forwards;
+    animation-delay: 0.2s;
+}
+
+.slide.active .slide-overlay p:nth-of-type(1) {
+    animation: slideFade 0.6s ease forwards;
+    animation-delay: 0.4s;
+}
+
+.slide.active .slide-overlay p:nth-of-type(2) {
+    animation: slideFade 0.6s ease forwards;
+    animation-delay: 0.6s;
+}
+
+@keyframes slideFade {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-overlay h3 {
+    color: #1db954;
+    margin-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.slide-overlay p {
+    color: #ccc;
+    margin-bottom: 8px;
+}
+
+/* Controls */
+.slideshow-controls {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.slideshow-controls button {
+    background: #1db954;
+    border: none;
+    color: #000;
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Video */
+.video-container {
+    margin: 40px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,255,150,0.3);
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 450px;
+}
+
+/* Portfolio */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.portfolio-item {
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,255,150,0.3);
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.portfolio-item-content {
+    padding: 15px;
+}
+
+.portfolio-item-content h3 {
+    margin-bottom: 10px;
+}
+
+.portfolio-item-content p {
+    font-size: 0.95em;
+    color: #ccc;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .slideshow {
+        height: 350px;
     }
 
-    body {
-        background-color: #0d0d0d;
-        color: #f0f0f0;
-        line-height: 1.6;
-        overflow-x: hidden;
+    .slide-overlay {
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        top: auto;
+        background: rgba(0,0,0,0.75);
+        transform: translateY(20px);
     }
 
-    a {
-        color: #1db954;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    /* Scrolling grid background */
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 200%;
-        background: repeating-linear-gradient(
-            0deg,
-            #1a1a1a,
-            #1a1a1a 2px,
-            #111 2px,
-            #111 20px
-        ), repeating-linear-gradient(
-            90deg,
-            #1a1a1a,
-            #1a1a1a 2px,
-            #111 2px,
-            #111 20px
-        );
-        animation: scrollGrid 60s linear infinite;
-        z-index: -1;
-    }
-
-    @keyframes scrollGrid {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(-50px, -50px); }
-    }
-
-    header {
-        text-align: center;
-        padding: 60px 20px 40px;
-    }
-
-    header h1 {
-        font-size: 2.5em;
-        margin-bottom: 10px;
-    }
-
-    header p {
-        font-size: 1.1em;
-        color: #aaa;
-        margin-bottom: 5px;
-    }
-
-    .video-container {
-        margin: 20px auto 40px;
-        max-width: 800px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(0,255,150,0.3);
+    .slide.active .slide-overlay {
+        transform: translateY(0);
     }
 
     .video-container iframe {
-        width: 100%;
-        height: 450px;
+        height: 250px;
     }
-
-    .section {
-        max-width: 1000px;
-        margin: 50px auto;
-        padding: 20px;
-        background: rgba(20, 20, 20, 0.7);
-        border-radius: 10px;
-    }
-
-    .section h2 {
-        margin-bottom: 20px;
-        border-bottom: 2px solid #1db954;
-        display: inline-block;
-        padding-bottom: 5px;
-    }
-
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-    }
-
-    .portfolio-item {
-        background: #1a1a1a;
-        border-radius: 10px;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .portfolio-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,255,150,0.3);
-    }
-
-    .portfolio-item img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        background: #333;
-    }
-
-    .portfolio-item-content {
-        padding: 15px;
-    }
-
-    .portfolio-item-content h3 {
-        margin-bottom: 10px;
-    }
-
-    .portfolio-item-content p {
-        font-size: 0.95em;
-        color: #ccc;
-    }
-
-    footer {
-        text-align: center;
-        padding: 40px 20px;
-        color: #666;
-        font-size: 0.9em;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-        header h1 {
-            font-size: 2em;
-        }
-        .video-container iframe {
-            height: 250px;
-        }
-    }
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -170,18 +287,76 @@
     <a href="https://www.unitedhollowrepublic.com/files/documents/LSimonIIIResume.pdf">View Resume</a>
 </header>
 
-<div class="video-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/CZS5WdostMQ?si=AJoUe0MSYGhbjZ2Y&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>
-</div>
-
+<!-- ABOUT -->
 <section class="section" id="about">
     <h2>About Me</h2>
     <p>Technical Designer and Systems Engineer with 5+ years of development and 2 years professional industry experience. Specializes in immersive VR, multiplayer systems, and gameplay optimization. Skilled in simulated systems via Unity, Unreal, and Godot with expertise in C#, C++, and Java. Passionate about creating engaging simulated experiences through innovative technical design and workflow tools development.</p>
 </section>
 
+<!-- SLIDESHOW -->
+<div class="slideshow">
 
+    <div class="slide active">
+        <img src="https://www.unitedhollowrepublic.com/images/showcase/GroupInfantry.png">
+        <div class="slide-overlay">
+            <h3>Multiplayer Combat System</h3>
+            <p>Scalable network architecture for large battles.</p>
+            <p>Latency optimization and synchronization systems.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="https://www.unitedhollowrepublic.com/images/showcase/AH1Z.png">
+        <div class="slide-overlay">
+            <h3>Advanced Pylon Simulations</h3>
+            <p>Immersive and realistic aircraft weaponry.</p>
+            <p>Optimized for accuracy and simulation.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <video src="https://www.unitedhollowrepublic.com/images/showcase/InvictusBallistics2.mp4" muted></video>
+        <div class="slide-overlay">
+            <h3>Integrated Ballistics</h3>
+            <p>Atmospheric Physics accuracy on Ballistic systems.</p>
+            <p>Real-time velocity, simulation, penetration, and feedback.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="https://www.unitedhollowrepublic.com/images/showcase/AH1Z.png">
+        <div class="slide-overlay">
+            <h3>Advanced Pylon Simulations</h3>
+            <p>Immersive and realistic aircraft weaponry.</p>
+            <p>Optimized for accuracy and simulation.</p>
+        </div>
+    </div>
+
+        <div class="slide">
+        <video src="https://www.unitedhollowrepublic.com/images/showcase/AISystem.png" muted></video>
+        <div class="slide-overlay">
+            <h3>AI Behavior Systems</h3>
+            <p>Modular AI supporting dynamic combat scenarios.</p>
+            <p>Real-time decision making and adaptability.</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="slideshow-controls">
+    <button onclick="prevSlide()">◀</button>
+    <button onclick="togglePlay()" id="playBtn">Pause</button>
+    <button onclick="nextSlide()">▶</button>
+</div>
+
+<!-- VIDEO -->
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/CZS5WdostMQ?controls=0" allowfullscreen></iframe>
+</div>
+
+<!-- PORTFOLIO -->
 <section class="section" id="portfolio">
-    <h2>Portfolio</h2>
+    <h2>Projects</h2>
     <div class="portfolio-grid">
         <div class="portfolio-item">
             <img src="placeholder_prelauncher.jpg" alt="Prelancer Studios Project">
@@ -190,6 +365,7 @@
                 <p>Developed and produced ARES Wargames simulation project. Engineered network compatibility, modular AI systems, and modeled 100+ assets for VR simulation.</p>
             </div>
         </div>
+
         <div class="portfolio-item">
             <img src="placeholder_vrmilsim.jpg" alt="VRMILSIM.COM Project">
             <div class="portfolio-item-content">
@@ -197,6 +373,7 @@
                 <p>Designed 300+ VR military simulation levels, developed immersive physics solutions, and engineered multiplayer systems for stability and realism.</p>
             </div>
         </div>
+
         <div class="portfolio-item">
             <img src="placeholder_pjkt_expo.jpg" alt="PJKT Expo Project">
             <div class="portfolio-item-content">
@@ -207,10 +384,53 @@
     </div>
 </section>
 
-
 <footer>
     &copy; 2026 Louis Simon III
 </footer>
+
+<script>
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+let playing = true;
+let interval = setInterval(nextSlide, 5000);
+
+function showSlide(i) {
+    slides.forEach(slide => {
+        slide.classList.remove("active");
+        let v = slide.querySelector("video");
+        if (v) v.pause();
+    });
+
+    slides[i].classList.add("active");
+
+    let activeVideo = slides[i].querySelector("video");
+    if (activeVideo) activeVideo.play();
+}
+
+function nextSlide() {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+}
+
+function prevSlide() {
+    index = (index - 1 + slides.length) % slides.length;
+    showSlide(index);
+}
+
+function togglePlay() {
+    const btn = document.getElementById("playBtn");
+
+    if (playing) {
+        clearInterval(interval);
+        btn.innerText = "Play";
+    } else {
+        interval = setInterval(nextSlide, 5000);
+        btn.innerText = "Pause";
+    }
+
+    playing = !playing;
+}
+</script>
 
 </body>
 </html>
