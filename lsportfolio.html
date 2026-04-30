@@ -115,7 +115,7 @@ header p {
     object-fit: cover;
 }
 
-/* Overlay panel */
+/* Overlay */
 .slide-overlay {
     position: absolute;
     top: 0;
@@ -136,7 +136,15 @@ header p {
     );
 }
 
-/* Animation setup */
+/* Text shadow FIX */
+.slide-overlay h3,
+.slide-overlay p {
+    text-shadow:
+        0 2px 6px rgba(0,0,0,0.8),
+        0 0 12px rgba(0,0,0,0.6);
+}
+
+/* Animation */
 .slide-overlay h3,
 .slide-overlay p {
     opacity: 0;
@@ -253,9 +261,7 @@ footer {
 
 /* Mobile */
 @media (max-width: 700px) {
-    .slideshow {
-        height: 350px;
-    }
+    .slideshow { height: 350px; }
 
     .slide-overlay {
         width: 100%;
@@ -287,13 +293,12 @@ footer {
     <a href="https://www.unitedhollowrepublic.com/files/documents/LSimonIIIResume.pdf">View Resume</a>
 </header>
 
-<!-- ABOUT -->
 <section class="section" id="about">
     <h2>About Me</h2>
     <p>Technical Designer and Systems Engineer with 5+ years of development and 2 years professional industry experience. Specializes in immersive VR, multiplayer systems, and gameplay optimization. Skilled in simulated systems via Unity, Unreal, and Godot with expertise in C#, C++, and Java. Passionate about creating engaging simulated experiences through innovative technical design and workflow tools development.</p>
 </section>
 
-<!-- SLIDESHOW -->
+<!-- SLIDESHOW  -->
 <div class="slideshow">
 
     <div class="slide active">
@@ -324,20 +329,56 @@ footer {
     </div>
 
     <div class="slide">
-        <img src="https://www.unitedhollowrepublic.com/images/showcase/AH1Z.png">
+        <img src="https://www.unitedhollowrepublic.com/images/showcase/Datalink.png">
         <div class="slide-overlay">
-            <h3>Advanced Pylon Simulations</h3>
-            <p>Immersive and realistic aircraft weaponry.</p>
-            <p>Optimized for accuracy and simulation.</p>
+            <h3>Full System Compatability</h3>
+            <p>Accurate and Realistic Datalink capabilities.</p>
+            <p>Monitoring, Controlling, and Integrating the virtual battlefield.</p>
         </div>
     </div>
 
-        <div class="slide">
+    <div class="slide">
         <video src="https://www.unitedhollowrepublic.com/images/showcase/AISystem.png" muted></video>
         <div class="slide-overlay">
             <h3>AI Behavior Systems</h3>
             <p>Modular AI supporting dynamic combat scenarios.</p>
             <p>Real-time decision making and adaptability.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <video src="https://www.unitedhollowrepublic.com/images/showcase/Interactions.mp4" muted></video>
+        <div class="slide-overlay">
+            <h3>Interactive Systems</h3>
+            <p>Fully modeled interaction systems and modules.</p>
+            <p>Not just observing, but expanding beyond simulation.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="https://www.unitedhollowrepublic.com/images/showcase/Infantry.png">
+        <div class="slide-overlay">
+            <h3>Infantry Systems</h3>
+            <p>Fully modular system interactions and VR engagement.</p>
+            <p>From simulated recoil to full-body kinematics simulation.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="https://www.unitedhollowrepublic.com/images/showcase/APS.png">
+        <div class="slide-overlay">
+            <h3>Active Protection</h3>
+            <p>Accurately simulated threat detection and response.</p>
+            <p>Dynamic Control of threats, protection, countermeasure, & systems.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="https://www.unitedhollowrepublic.com/images/showcase/NVG.png">
+        <div class="slide-overlay">
+            <h3>Infrared Optics</h3>
+            <p>Virtual-Reality adapted Thermal and Night-Vision devices.</p>
+            <p>Interactive adjustable nodes and integrated visibility.</p>
         </div>
     </div>
 
@@ -394,6 +435,13 @@ let index = 0;
 let playing = true;
 let interval = setInterval(nextSlide, 5000);
 
+function resetTimer() {
+    if (playing) {
+        clearInterval(interval);
+        interval = setInterval(nextSlide, 5000);
+    }
+}
+
 function showSlide(i) {
     slides.forEach(slide => {
         slide.classList.remove("active");
@@ -410,11 +458,13 @@ function showSlide(i) {
 function nextSlide() {
     index = (index + 1) % slides.length;
     showSlide(index);
+    resetTimer();
 }
 
 function prevSlide() {
     index = (index - 1 + slides.length) % slides.length;
     showSlide(index);
+    resetTimer();
 }
 
 function togglePlay() {
