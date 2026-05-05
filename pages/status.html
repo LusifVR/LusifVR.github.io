@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Operation Dashboard</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #0a0f14;
+    color: #d7e0ea;
+    display: flex;
+}
+
+/* Panels */
+.sidebar, .rightbar {
+    width: 240px;
+    background: #0f1620;
+    padding: 15px;
+    height: 100vh;
+}
+
+.sidebar { border-right: 2px solid #1f2a38; }
+.rightbar { border-left: 2px solid #1f2a38; }
+
+/* Center */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 18px;
+    color: #4fc3f7;
+    letter-spacing: 2px;
+}
+
+.highlight {
+    color: #ffd54f;
+}
+
+/* Sections */
+.section {
+    background: #121821;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-left: 4px solid #4fc3f7;
+    border-radius: 6px;
+}
+
+/* Progress */
+.progress-bar {
+    display: flex;
+    gap: 3px;
+}
+.progress-bar div {
+    width: 16px;
+    height: 16px;
+    background: #2a3440;
+}
+.progress-bar .filled {
+    background: #4fc3f7;
+}
+
+/* Tags */
+.tag {
+    position: relative;
+    display: inline-block;
+    margin: 3px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.neg { background: #5c1f1f; }
+.pos { background: #1f5c3a; }
+.neutral { background: #6b5e1f; }
+
+/* Tooltip */
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1c2530;
+    padding: 6px;
+    border-radius: 5px;
+    width: 170px;
+    font-size: 11px;
+    transition: 0.2s;
+}
+
+.tag:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Stat rows (compact) */
+.stat-group {
+    margin-bottom: 6px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between box and text */
+    margin: 6px 0;
+}
+
+.value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 32px;
+    background: #222;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 6px;
+    flex-shrink: 0; /* prevents shrinking */
+}
+
+.stat-row span:last-child {
+    color: #4fc3f7;
+}
+
+.stat-divider {
+    height: 1px;
+    background: #1f2a38;
+    margin: 6px 0;
+}
+
+/* Notes */
+.note {
+    background: #121821;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- LEFT PANEL -->
+
+<div class="sidebar">
+    <h1>OPERATION COPPERHEAD III</h1>
+
+
+<p><strong>LOCATION</strong><br><span class="highlight">ASPIN</span></p>
+
+<p><strong>TYPE</strong><br><span class="highlight">COUNTER-OFFENSIVE</span></p>
+
+<p><strong>OBJECTIVE</strong><br>Flush out enemies + destroy inverters</p>
+
+
+</div>
+
+<!-- CENTER -->
+
+<div class="main">
+
+
+<div class="section">
+    <h3>Campaign Status</h3>
+    <p>
+    Following the attacks in southern Paraq, Republic Troops respond to the final assault on Aspin's straight.
+    With the IDA's initial attacks slowed, a full response can be initiated.
+        <br>
+    A dense close-quarters urban Infantry-based operation supported by 4th Mechanized and the Republic's maritime
+    fleet in the straight.
+    </p>
+</div>
+
+<div class="section">
+    <h3>Progress</h3>
+    <div class="progress-bar">
+        <div class="filled"></div><div class="filled"></div>
+        <div class="filled"></div><div class="filled"></div>
+        <div class="filled"></div><div class="filled"></div>
+        <div class="filled"></div><div class="filled"></div>
+        <div></div>
+    </div>
+</div>
+
+<div class="section">
+    <h3>Features</h3>
+
+    <div class="tag neutral">Draft Winds
+        <div class="tooltip">Strong crosswinds affecting drone and aerial support.</div>
+    </div>
+
+    <div class="tag neutral">Urban Architecture
+        <div class="tooltip">Dense structures provide cover and ambush opportunities.</div>
+    </div>
+
+    <div class="tag neutral">Urban Seawall
+        <div class="tooltip">Multiple Port-entry ways and wave-breaks.</div>
+    </div>
+</div>
+
+<div class="section">
+    <h3>Modifiers</h3>
+
+    <strong style="opacity:0.7;">Negative</strong><br>
+
+    <div class="tag neg">▼ Heavy Enemy Presence
+        <div class="tooltip">Enemy infantry density increased.</div>
+    </div>
+
+    <div class="tag neg">▼ Enemy Naval Presence
+        <div class="tooltip">Enemy Naval Armada nearby.</div>
+    </div>
+
+    <div class="tag neg">▼ Enemy Anti-Armor Support
+        <div class="tooltip">AT units active in combat zone.</div>
+    </div>
+
+    <br><br>
+
+    <strong style="opacity:0.7;">Positive</strong><br>
+
+    <div class="tag pos">▲ Republic Naval Support
+        <div class="tooltip">Naval artillery available offshore.</div>
+    </div>
+
+    <div class="tag pos">▲ Expeditionary Force
+        <div class="tooltip">Additional friendly units deployed.</div>
+    </div>
+
+    <div class="tag pos">▲ 4th Mechanized
+        <div class="tooltip">Armored Vehicle Support. (Marshal)</div>
+    </div>
+
+</div>
+
+<div class="section">
+    <h3>Campaign Stats</h3>
+
+        <div class="stat-group">
+            <div class="stat-row"><span class="value">UNLIMITED RESUPPLY</span> 📦 Supply Points</div>
+            <div class="stat-row"><span class="value">5</span> 📟 Intel Collected</div>
+            <div class="stat-row"><span class="value">1</span> 📋 Secrets Found</div>
+        </div>
+
+<div class="stat-divider"></div>
+
+        <div class="stat-group">
+            <div class="stat-row"><span class="value">219</span> 📘 Friendly KIA</div>
+            <div class="stat-row"><span class="value">588</span> 📕 Enemy KIA</div>
+            <div class="stat-row"><span class="value">15,694</span> 📙 Civilian KIA</div>
+        </div>
+</div>
+
+
+<div class="section">
+    <h3>Reputation</h3>
+    <div class="tag neutral">🟩 Overwhelming Support
+        <div class="tooltip">The citizens side with you. They are counting on your success.</div>
+    </div>
+</div>
+
+
+</div>
+
+<!-- RIGHT PANEL -->
+
+<div class="rightbar">
+    <h1>NOTES</h1>
+
+
+<div class="note">Enemy sabotage of communications relays.</div>
+<div class="note">Active fleet engagement.</div>
+<div class="note">Civilians present.</div>
+
+
+</div>
+
+</body>
+</html>
