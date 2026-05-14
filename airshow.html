@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Update Changelog</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; font-family:'Consolas','Courier New',monospace; background:#111; color:#ff0; overflow:hidden; }
+#intro { position: fixed; top:0; left:0; width:100%; height:100%; background:#111; display:flex; justify-content:center; align-items:center; color:yellow; font-size:4em; font-weight:bold; text-transform:uppercase; z-index:1000; animation: glitchScreen 0.8s steps(10) forwards; }
+@keyframes glitchScreen {
+0% { opacity:0; transform:translate(0,0); text-shadow:none; }
+10% { opacity:1; transform:translate(-5px,0); text-shadow:2px 0 #ff0,-2px 0 #ff0; }
+20% { transform:translate(5px,-2px); text-shadow:-2px 0 #ff0,2px 0 #ff0; }
+30% { transform:translate(-3px,2px); text-shadow:2px 2 #ff0,-2px -2 #ff0; }
+40% { transform:translate(3px,-1px); text-shadow:-2px 1 #ff0,2px -1 #ff0; }
+50% { transform:translate(-2px,0); text-shadow:2px -2 #ff0,-2px 2 #ff0; }
+60% { transform:translate(2px,1px); text-shadow:2px 0 #ff0,-2px 0 #ff0; }
+70% { transform:translate(-1px,-1px); text-shadow:-2px 2 #ff0,2px -2 #ff0; }
+80% { transform:translate(1px,0); text-shadow:2px -2 #ff0,-2px 2 #ff0; }
+90% { transform:translate(0,0); text-shadow:0 0 yellow; }
+100% { opacity:0; transform:translate(0,0); text-shadow:none; }
+}
+body::before {
+content:"";
+position:fixed; top:0; left:0; width:100%; height:100%;
+background-image: linear-gradient(to right, rgba(255,255,0,0.05) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(255,255,0,0.05) 1px, transparent 1px);
+background-size: 40px 40px;
+animation: gridScroll 15s linear infinite;
+z-index:0;
+}
+@keyframes gridScroll {
+from { background-position: 0 0; }
+to { background-position: 40px 40px; }
+}
+#main-content { display:none; position:relative; z-index:1; height:100%; overflow-y:auto; padding:20px; }
+.banner { position:relative; width:100%; height:250px; background:url('https://via.placeholder.com/1200x250.png?text=Game+Banner') center/cover no-repeat; border-radius:8px; margin-bottom:20px; }
+.banner::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); border-radius:8px; }
+.banner-text { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:2em; color:#ff0; text-shadow:0 0 10px #ff0; font-weight:bold; text-align:center; z-index:1; }
+.intro { margin-bottom:30px; text-align:center; font-size:1.2em; color:#ff0; }
+h1 { text-align:center; margin-bottom:30px; font-size:2em; color:#ff0; text-shadow:0 0 5px #ff0; }
+.section { display:flex; background:rgba(34,34,34,0.9); border:1px solid #ff0; border-radius:8px; overflow:hidden; margin-bottom:20px; box-shadow:0 0 10px rgba(255,255,0,0.2); transition: transform 0.3s, box-shadow 0.3s; }
+.section:hover { transform:translateY(-5px); box-shadow:0 0 20px yellow; }
+.section img { width:200px; height:150px; object-fit:cover; border-right:1px solid #ff0; }
+.section .content { padding:15px; display:flex; flex-direction:column; justify-content:center; color:#ff0; }
+.section .content h2 { margin-bottom:10px; color:#ff0; font-size:1.5em; border-bottom:1px dashed #ff0; padding-bottom:5px; }
+.section .content p { line-height:1.5; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<div id="intro">PHASE 7 - FULL CIRCLE</div>
+
+<div id="main-content">
+<div class="banner">
+  <div class="banner-text">PHASE 7 - FULL CIRCLE</div>
+</div>
+<div class="intro">
+  Welcome to Phase 7 FULL CIRCLE! Our final ARC in VRC before moving to ARES.
+  <br>
+  Explore the latest changes, new vehicles, avatars, and advanced systems.
+</div>
+
+<h1>DEV LOG</h1>
+
+<div class="section">
+  <div class="content">
+    <h2>Avatars</h2>
+    <p>
++ Parameter clean up on all avatars to improve file size, load time, and slightly assist performance
++ Fixed several issues related to material layouts, notably some avatars that had patch and goggle material swapped
+
++ Added multi-band jamming to Sapper Avatar
++ Added multi-band defusal device to EOD avatar
++ Fixed a bug related to the Medic's TQ
++ Fixed several issues with parallax and steady with Recon Avatar
++ Updated Engineer's repair tool for new damage model system.
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>GREENFOR</h2>
+    <p>
++ Return of the community-favorite role option as playing as GREENFOR
+<br>
+In this campaign, the Euron Coalition will be supporting the Republic's efforts
+against the Imperial Alliance. Multiple Greenfor avatars, vehicles, and specific
+objectives will be available throughout the upcoming operations.
+<br>
+Additionally, taskings will be available specific to GREENFOR in supporting
+role missions for Republic Campaigns. Including playable roles from Jinsan,
+Gredova, and more.
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Gameplay Changes</h2>
+    <p>
+Added 'WARFARE' mode.
+
+WARFARE will represent a majority of the remainder of Phase 7. Utilizing long-term
+campaign actions as well as extended duration operations. This will include a Zulu-post mode
+as well as branching paths as previously voted on in Cmd-comms.
+
+AI Improvements and tweaks >
+All systems related to AI, for Infantry & Vehicles, have been improved.
+This includes additional logic for ambushes, selective targeting, more realistic sightlines, and more.
+
+Vehicle Response >
+AI Vehicles, specifically friendly AI vehicles, can respond to friendly actions, such as advancing
+with players, firing on shared targets, or sharing datalink information.
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Vehicles – New Additions</h2>
+    <p>
+NEW VEHICLES:
++ Hunter JLTV
++ Bison APC
++ Tiger MGS
++ Cheetah SPAA
++ Grizzly SPG
++ Marshal ACV [SEP2]
++ Rhino MTA5 [SEP2]
++ Fennec ASV (Greenfor)
++ Jackal MRAP (Greenfor)
+
+NEW AIRCRAFT:
+F/A-81 Superwasp [Block II]
+SR-91 Griffon
+E-21 Vulture
+MH-7 Sparrow
+F-96 Kestral (Greenfor)
+F-57 Sakura (Greenfor)
+
+NEW NAVALCRAFT:
+MK-12 BARRACUDA
+ATD PAXAN-CLASS 
+
+NEW DRONES:
+X-A3 Falcon
+X-21 Wingman
+
+NEW VEHICLE EQUIPMENT:
+M2HB - Commander Weapons Station
+X9 - Active Protection System
+M361 - Anti-Tank Missile Launcher
+
+NEW VEHICLE FEATURES:
++ Player Inventory Slots [Stowable Pickups]
++ Electronic Warfare Suite
++ Improved Damage Model
++ 'Buddy' Air-Refueling
++ Improved Wear Model
++ Towing System & Suite
++ Trailer Logic & Hitch
++ Airliftable Cargo slots
++ Fastroping interact & toggle
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Vehicles – Improvements</h2>
+    <p>
+Overall improved handling and suspension, including synced performance to remote players, especially those with slower connections.
+
+Various utility systems now feature complete. This includes screens such as engine display, status page, fuel tank readout, drivetrain view, and many others. Screens will now only show "FAULT" if there is an error or a module is missing.
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Community Events</h2>
+    <p>
+This year, Phase 7 is a love-letter to the UHR community.
+
+We have many fun community-based events that will take place during this arc.
+
+This includes:
+
+UHR 2026 AIRSHOW
+ARES SHOOTER COMP
+GRAND BRIDGE PRIX
+PROWLER RALLY 2026
+PARA-FRENZY
+MAY THE 4TH BE WITH YOU
+HALO DAY
+
+And many more in development!
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Electronic Warfare</h2>
+    <p>
+Introducing the final interactivity addition for vehicles. EW and ECM.
+
+Armored Vehicles, such as the Rhino MTA3 and Marshal ACV-2 have been outfitted with both softkill ECM as well as hardkill APS. 
+The commander seat has access to both of these systems and will receive a warning alarm when a threat or projectile is inbound. 
+This system is not modeled for the gunner or driver and requires a commander to utilize.
+
+Squad vehicles, such as the Hunter JLTV and Bison APC also have an advanced active protective system.
+They utilize the same controls as the Rhino and Marshal commander seat so additional training is not necessary.
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Improved Logistics</h2>
+    <p>
+Expanding Logistic library from 20 objects to over 100 objects, improving stability, adding towing and trailer options, and more.
+
+Friendly Infantry AI will now deploy to established FOBs. When a FOB is constructed, friendly AI units will spawn to protect it.
+This allows for the players to continue pushing onto an objective, establishing a 'leapfrogging' gameplay method.
+
+This also means that Enemy AI can spawn at Enemy FOBs. This will require players to be more selective with positioning, and
+have more notable movement. Enemy & Friendly support systems will fire on opposing team fortifications if within range.
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Additional Taskings</h2>
+    <p>
+During the first half of Phase 7 we ran our first few test Tasking missions
+which all recieved positive feedback. Additional bonus taskings and any taskings missed
+throughout Phase 6 and the first half of Phase 7 will be awarded available!
+
+Taskings will be posted to the campaign channel when available.
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Closeout</h2>
+    <p>
+This ARC leads us into our future in ARES.
+Let's have a great year!
+
+Always Fight Forward
+    </p>
+  </div>
+</div>
+
+</div>
+
+<script>
+setTimeout(() => {
+  document.getElementById('intro').style.display='none';
+  document.getElementById('main-content').style.display='block';
+  document.body.style.overflow='auto';
+},800);
+</script>
+
+</body>
+</html>
+``
