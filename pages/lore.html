@@ -42,7 +42,10 @@ body {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.9));
+    background: linear-gradient(
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.9)
+    );
 }
 
 .hero-content {
@@ -70,6 +73,7 @@ nav {
     background: rgba(11,15,20,0.95);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(10px);
+    z-index: 10;
 }
 
 nav ul {
@@ -119,57 +123,101 @@ main {
         <h1 class="hero-title" id="heroTitle"></h1>
         <p class="hero-desc" id="heroDesc"></p>
     </div>
+
 </header>
 
 <!-- NAV -->
 <nav id="nav">
     <ul>
-        <li><a data-title="Overview"
+
+        <li>
+            <a href="lore/Overview.html"
+               data-title="Overview"
                data-desc="A fragmented world shaped by prolonged conflict and collapsing alliances."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">Overview</a></li>
+               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                Overview
+            </a>
+        </li>
 
-        <li><a data-title="History"
+        <li>
+            <a href="history.html"
+               data-title="History"
                data-desc="Key events leading to the current conflicts."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">History</a></li>
+               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                History
+            </a>
+        </li>
 
-        <li><a data-title="Factions"
+        <li>
+            <a href="factions.html"
+               data-title="Factions"
                data-desc="Nations, powers, and groups."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">Factions</a></li>
+               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                Factions
+            </a>
+        </li>
 
-        <li><a data-title="Locations"
+        <li>
+            <a href="locations.html"
+               data-title="Locations"
                data-desc="Key landmarks and warzones."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">Locations</a></li>
+               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                Locations
+            </a>
+        </li>
 
-        <li><a data-title="Arsenal"
+        <li>
+            <a href="arsenal.html"
+               data-title="Arsenal"
                data-desc="Vehicles, Weapons, & Systems."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">Arsenal</a></li>
+               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                Arsenal
+            </a>
+        </li>
 
-        <li><a data-title="Characters"
-               data-desc="Operatives and important individuals"
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">Characters</a></li>
+        <li>
+            <a href="characters.html"
+               data-title="Characters"
+               data-desc="Operatives and important individuals."
+               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                Characters
+            </a>
+        </li>
 
-        <li><a data-title="Intel"
-               data-desc="Review intel found during events"
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">Intel</a></li>
+        <li>
+            <a href="lore/intel.html"
+               data-title="Intel"
+               data-desc="Review intel found during events."
+               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                Intel
+            </a>
+        </li>
+
     </ul>
 </nav>
 
 <!-- CONTENT -->
 <main>
+
     <div class="section-box">
         <h1>Welcome</h1>
-        <p>Use the navigation buttons above to explore the lore.
+
+        <p>
+            Use the navigation buttons above to explore the lore.
         </p>
     </div>
+
 </main>
 
 <script>
+
 const hero = document.getElementById("hero");
 const heroTitle = document.getElementById("heroTitle");
 const heroDesc = document.getElementById("heroDesc");
 const nav = document.getElementById("nav");
 
 /* DEFAULT HERO STATE */
+
 const defaultState = {
     title: "Lore Hub",
     desc: "Select a category below to view lore content.",
@@ -177,38 +225,44 @@ const defaultState = {
 };
 
 /* SET HERO */
+
 function setHero(state) {
+
     heroTitle.textContent = state.title;
     heroDesc.textContent = state.desc;
+
     hero.style.backgroundImage = `url(${state.bg})`;
+
 }
 
 /* NAV INTERACTIONS */
+
 document.querySelectorAll("nav a").forEach(link => {
+
     link.addEventListener("mouseenter", () => {
+
         setHero({
             title: link.dataset.title,
             desc: link.dataset.desc,
             bg: link.dataset.bg
         });
+
     });
 
-    link.addEventListener("click", () => {
-        setHero({
-            title: link.dataset.title,
-            desc: link.dataset.desc,
-            bg: link.dataset.bg
-        });
-    });
 });
 
 /* RESET WHEN NOT HOVERING NAV */
+
 nav.addEventListener("mouseleave", () => {
+
     setHero(defaultState);
+
 });
 
 /* INIT DEFAULT */
+
 setHero(defaultState);
+
 </script>
 
 </body>
