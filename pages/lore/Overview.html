@@ -1,917 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>UNITED HOLLOW REPUBLIC — Overview</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<style>
-
-/* ==========================
-   BASE
-========================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --bg: #050a12;
-    --panel: rgba(12, 18, 32, .78);
-    --panel-dark: rgba(5, 10, 18, .88);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    --accent: #4f7cff;
-    --accent-light: #ffee00;
-
-    --text: #e4ebff;
-    --muted: #9aa7c9;
-
-    --border: rgba(79, 124, 255, .28);
-    --border-bright: rgba(79, 124, 255, .65);
-}
-
-/* ==========================
-   PAGE
-========================== */
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
+    <title>UNITED HOLLOW REPUBLIC — Overview</title>
 
-    background: var(--bg);
-    color: var(--text);
+    <meta name="theme-color" content="#050a12">
 
-    font-family: "Segoe UI", Inter, Arial, sans-serif;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #050a12;
+            --panel: rgba(12, 18, 32, 0.82);
+            --panel-dark: rgba(5, 10, 18, 0.92);
 
-body {
-    padding: 14px;
-    overflow-x: hidden;
-}
+            --accent: #4f7cff;
+            --accent-light: #ffee00;
 
-/* ==========================
-   BACKGROUND GRID
-========================== */
+            --text: #e4ebff;
+            --muted: #9aa7c9;
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
+            --border: rgba(79, 124, 255, 0.22);
+            --border-bright: rgba(79, 124, 255, 0.55);
+
+            --radius: 8px;
+            --transition: 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(79, 124, 255, .12),
-            transparent 75%
-        ),
-        linear-gradient(
-            rgba(5, 10, 18, .82),
-            rgba(5, 10, 18, .94)
-        );
+        html {
+            scroll-behavior: smooth;
+        }
 
-    pointer-events: none;
-    z-index: -2;
-}
+        body {
+            min-height: 100vh;
+            padding: 14px;
+
+            overflow-x: hidden;
+
+            background: var(--bg);
+            color: var(--text);
+
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* Background */
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+        }
+
+        body::before {
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(79, 124, 255, 0.12),
+                    transparent 75%
+                ),
+                linear-gradient(
+                    rgba(5, 10, 18, 0.82),
+                    rgba(5, 10, 18, 0.94)
+                );
+
+            z-index: -2;
+        }
+
+        body::after {
+            background-image:
+                linear-gradient(rgba(79, 124, 255, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(79, 124, 255, 0.055) 1px, transparent 1px);
+
+            background-size: 32px 32px;
+            z-index: -1;
+        }
+
+        /* Main Layout */
+
+        .page {
+            display: grid;
+            grid-template-columns: minmax(0, 1.62fr) minmax(300px, 1fr);
+            gap: 12px;
+
+            width: 100%;
+            min-height: calc(100vh - 28px);
+        }
+
+        .left,
+        .right {
+            position: relative;
+
+            min-width: 0;
+            padding: 16px;
+
+            background: linear-gradient(
+                145deg,
+                rgba(15, 24, 43, 0.88),
+                rgba(5, 10, 18, 0.94)
+            );
+
+            border: 1px solid var(--border-bright);
+
+            box-shadow:
+                0 0 30px rgba(79, 124, 255, 0.05),
+                inset 0 0 30px rgba(79, 124, 255, 0.025);
+
+            backdrop-filter: blur(14px);
+        }
+
+        .left,
+        .right,
+        .right {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left {
+            min-height: calc(100vh - 28px);
+        }
+
+        .right {
+            gap: 12px;
+        }
+
+        /* Panel Corner Accents */
+
+        .left::before,
+        .right::before,
+        .hero-card::before,
+        .text-card::before,
+        .footer::before,
+        .large-panel::before,
+        .left::after,
+        .right::after,
+        .hero-card::after,
+        .text-card::after,
+        .footer::after,
+        .large-panel::after {
+            content: "";
+
+            position: absolute;
+
+            width: 30px;
+            height: 2px;
+
+            background: var(--accent);
+
+            box-shadow: 0 0 10px rgba(79, 124, 255, 0.65);
+
+            pointer-events: none;
+        }
+
+        .left::before,
+        .right::before,
+        .hero-card::before,
+        .text-card::before,
+        .footer::before,
+        .large-panel::before {
+            top: -1px;
+            left: -1px;
+        }
+
+        .left::after,
+        .right::after,
+        .hero-card::after,
+        .text-card::after,
+        .footer::after,
+        .large-panel::after {
+            bottom: -1px;
+            right: -1px;
+        }
+
+        /* Typography */
+
+        h1,
+        h2,
+        p {
+            margin: 0;
+        }
+
+        .title {
+            margin: 4px 4px 42px;
 
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
+            color: var(--accent-light);
 
-    background-image:
-        linear-gradient(
-            rgba(79, 124, 255, .065) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(79, 124, 255, .065) 1px,
-            transparent 1px
-        );
+            font-size: clamp(26px, 2.5vw, 36px);
+            font-weight: 800;
+            letter-spacing: 4px;
+            line-height: 1;
 
-    background-size: 32px 32px;
+            text-shadow: 0 0 16px rgba(79, 124, 255, 0.3);
+        }
 
-    pointer-events: none;
-    z-index: -1;
-}
+        .section {
+            margin: 0 4px 32px;
+        }
 
-/* ==========================
-   MAIN LAYOUT
-========================== */
+        .section h2,
+        .side-title,
+        .caption-title,
+        .footer-title {
+            color: var(--accent-light);
 
-.page {
-    width: 100%;
-    max-width: none;
+            font-weight: 800;
+            line-height: 1.2;
+        }
 
-    min-height: calc(100vh - 28px);
+        .section h2 {
+            margin-bottom: 12px;
 
-    margin: 0;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
 
-    display: grid;
+        .copy {
+            color: var(--muted);
 
-    grid-template-columns: minmax(0, 1.62fr) minmax(300px, 1fr);
+            font-size: clamp(14px, 1vw, 15px);
+            font-weight: 400;
+            letter-spacing: 0.1px;
+            line-height: 1.8;
+        }
 
-    gap: 8px;
-}
+        /* Content with Images */
 
-/* ==========================
-   MAIN PANELS
-========================== */
+        .section.with-image {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 190px;
+            gap: 18px;
+            align-items: start;
+        }
 
-.left,
-.right {
-    position: relative;
+        .section.with-image h2 {
+            grid-column: 1 / -1;
+        }
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(15, 24, 43, .86),
-            rgba(5, 10, 18, .90)
-        );
+        .section.with-image .copy {
+            grid-column: 1;
+        }
 
-    border: 1px solid var(--border-bright);
+        /* Image Containers */
 
-    padding: 10px;
+        .placeholder {
+            position: relative;
 
-    box-shadow:
-        0 0 30px rgba(79, 124, 255, .06),
-        inset 0 0 30px rgba(79, 124, 255, .025);
+            overflow: hidden;
 
-    backdrop-filter: blur(10px);
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-.left {
-    min-height: calc(100vh - 28px);
+            background: linear-gradient(
+                135deg,
+                rgba(79, 124, 255, 0.12),
+                rgba(5, 10, 18, 0.95)
+            );
 
-    display: flex;
-    flex-direction: column;
-}
+            border: 1px solid var(--border-bright);
 
-.right {
-    min-height: calc(100vh - 28px);
+            box-shadow:
+                0 0 20px rgba(79, 124, 255, 0.06),
+                inset 0 0 20px rgba(79, 124, 255, 0.04);
+        }
 
-    display: flex;
-    flex-direction: column;
+        .placeholder img {
+            width: 100%;
+            height: 100%;
 
-    gap: 8px;
-}
+            object-fit: cover;
 
-/* ==========================
-   CORNER ACCENTS
-========================== */
+            opacity: 0.7;
 
-.left::before,
-.right::before,
-.hero-card::before,
-.text-card::before,
-.footer::before,
-.large-panel::before {
-    content: "";
+            filter: saturate(0.8) contrast(1.1) brightness(0.85);
 
-    position: absolute;
+            transition: var(--transition);
+        }
 
-    top: -1px;
-    left: -1px;
+        .placeholder:hover img {
+            opacity: 0.95;
 
-    width: 32px;
-    height: 2px;
+            filter: saturate(1) contrast(1.1) brightness(0.95);
 
-    background: var(--accent);
+            transform: scale(1.035);
+        }
 
-    box-shadow:
-        0 0 8px rgba(79, 124, 255, .7);
-}
+        .inline-image {
+            grid-column: 2;
 
-.left::after,
-.right::after,
-.hero-card::after,
-.text-card::after,
-.footer::after,
-.large-panel::after {
-    content: "";
+            width: 190px;
+            height: 250px;
 
-    position: absolute;
+            border-radius: 4px;
+        }
 
-    bottom: -1px;
-    right: -1px;
+        /* Footer */
 
-    width: 32px;
-    height: 2px;
+        .footer {
+            position: relative;
 
-    background: var(--accent);
+            height: 170px;
+            margin: auto 4px 0;
+            padding: 14px;
 
-    box-shadow:
-        0 0 8px rgba(79, 124, 255, .7);
-}
+            background: linear-gradient(
+                145deg,
+                rgba(12, 18, 32, 0.85),
+                rgba(5, 10, 18, 0.9)
+            );
 
-/* ==========================
-   TYPOGRAPHY
-========================== */
+            border: 1px solid var(--border);
 
-h1,
-h2,
-p {
-    margin: 0;
-}
+            box-shadow: inset 0 0 25px rgba(79, 124, 255, 0.035);
+        }
 
-.title {
-    font-size: clamp(24px, 2vw, 32px);
+        .footer-title {
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
 
-    line-height: 1;
+        /* Hero Image Card */
 
-    font-weight: 800;
+        .hero-card,
+        .text-card {
+            position: relative;
 
-    letter-spacing: 4px;
+            background: rgba(8, 14, 26, 0.78);
 
-    color: var(--accent-light);
+            border: 1px solid var(--border);
 
-    margin: 3px 3px 48px;
+            box-shadow: 0 0 25px rgba(79, 124, 255, 0.04);
 
-    text-shadow:
-        0 0 16px rgba(79, 124, 255, .3);
-}
+            backdrop-filter: blur(12px);
+        }
 
-.section {
-    margin: 0 3px 25px;
-}
+        .hero-card {
+            padding: 10px;
+        }
 
-.section h2,
-.side-title,
-.caption-title,
-.footer-title {
-    font-weight: 800;
-    line-height: 1;
-}
+        .hero-image {
+            width: 100%;
+            height: clamp(170px, 20vh, 240px);
+        }
 
-.section h2 {
-    font-size: 17px;
+        .hero-caption {
+            padding: 12px 4px 4px;
+        }
 
-    letter-spacing: 2px;
+        .caption-title {
+            margin-bottom: 8px;
 
-    color: var(--accent-light);
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
 
-    margin-bottom: 8px;
-}
+        .caption-copy {
+            color: var(--muted);
 
-.copy {
-    font-size: clamp(14px, 1vw, 16px);
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
 
-    line-height: 1.55;
+        /* Information and Navigation */
 
-    font-weight: 500;
+        .text-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 170px;
+            gap: 18px;
 
-    letter-spacing: .2px;
+            min-height: 400px;
 
-    color: var(--muted);
-}
+            padding: 18px 14px;
+        }
 
-/* ==========================
-   IMAGE SECTION
-========================== */
+        .side-title {
+            margin-bottom: 16px;
 
-.section.with-image {
-    display: grid;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
 
-    grid-template-columns:
-        minmax(0, 1fr)
-        178px;
+        .side-copy {
+            color: var(--muted);
 
-    gap: 14px;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.8;
 
-    align-items: start;
-}
+            white-space: pre-line;
+        }
 
-.section.with-image h2 {
-    grid-column: 1 / -1;
-}
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-self: stretch;
+            gap: 8px;
+        }
 
-.section.with-image .copy {
-    grid-column: 1;
-}
+        .nav-button {
+            position: relative;
 
-/* ==========================
-   IMAGE
-========================== */
+            display: flex;
+            flex: 1;
 
-.placeholder {
-    position: relative;
+            align-items: center;
+            justify-content: center;
 
-    overflow: hidden;
+            min-height: 46px;
+            padding: 10px 12px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(79, 124, 255, .12),
-            rgba(5, 10, 18, .95)
-        );
+            overflow: hidden;
 
-    border: 1px solid var(--border-bright);
+            background: linear-gradient(
+                135deg,
+                rgba(79, 124, 255, 0.1),
+                rgba(79, 124, 255, 0.025)
+            );
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            border: 1px solid rgba(79, 124, 255, 0.3);
 
-    color: var(--muted);
+            color: var(--text);
+            text-decoration: none;
 
-    font-weight: 800;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
 
-    letter-spacing: 2px;
+            transition: var(--transition);
+        }
 
-    box-shadow:
-        0 0 20px rgba(79, 124, 255, .08),
-        inset 0 0 20px rgba(79, 124, 255, .06);
-}
+        .nav-button::before {
+            content: "";
 
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
 
-.inline-image {
-    width: 178px;
-    height: 230px;
+            width: 3px;
 
-    grid-column: 2;
-}
+            background: var(--accent);
 
-.inline-image img,
-.hero-image img {
-    width: 100%;
-    height: 100%;
+            opacity: 0.5;
 
-    object-fit: cover;
+            transition: var(--transition);
+        }
 
-    opacity: .58;
+        .nav-button:hover,
+        .nav-button:focus-visible {
+            transform: translateX(-3px);
 
-    filter:
-        saturate(.75)
-        contrast(1.1)
-        brightness(.8);
+            background: rgba(79, 124, 255, 0.2);
 
-    transition: .3s;
-}
+            border-color: var(--accent);
 
-.placeholder:hover img {
-    opacity: .78;
+            color: white;
 
-    filter:
-        saturate(1)
-        contrast(1.1)
-        brightness(.9);
-}
+            box-shadow: 0 0 18px rgba(79, 124, 255, 0.15);
+        }
 
-/* ==========================
-   FOOTER
-========================== */
+        .nav-button:hover::before,
+        .nav-button:focus-visible::before,
+        .nav-button.active::before {
+            opacity: 1;
 
-.footer {
-    position: relative;
+            box-shadow: 0 0 10px rgba(79, 124, 255, 0.8);
+        }
 
-    margin: auto 3px 0;
+        .nav-button.active {
+            background: rgba(79, 124, 255, 0.2);
 
-    height: 198px;
+            border-color: var(--accent);
 
-    border: 1px solid var(--border);
+            color: var(--accent-light);
+        }
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(12, 18, 32, .8),
-            rgba(5, 10, 18, .85)
-        );
+        .nav-button:focus-visible {
+            outline: 2px solid var(--accent-light);
+            outline-offset: 2px;
+        }
 
-    padding: 9px 7px;
+        /* Lower Panel */
 
-    box-shadow:
-        inset 0 0 25px rgba(79, 124, 255, .04);
-}
+        .large-panel {
+            position: relative;
 
-.footer-title {
-    font-size: 11px;
+            flex: 1;
+            min-height: 220px;
 
-    letter-spacing: 2px;
+            background: linear-gradient(
+                145deg,
+                rgba(12, 18, 32, 0.85),
+                rgba(5, 10, 18, 0.92)
+            );
 
-    color: var(--accent-light);
-}
+            border: 1px solid var(--border);
 
-/* ==========================
-   HERO CARD
-========================== */
+            box-shadow: inset 0 0 30px rgba(79, 124, 255, 0.035);
+        }
 
-.hero-card {
-    position: relative;
+        /* Responsive */
 
-    border: 1px solid var(--border);
+        @media (min-width: 1400px) {
+            body {
+                padding: 18px;
+            }
 
-    background:
-        rgba(8, 14, 26, .7);
+            .page {
+                min-height: calc(100vh - 36px);
+            }
 
-    padding: 8px 7px 9px;
+            .left {
+                min-height: calc(100vh - 36px);
+            }
 
-    box-shadow:
-        0 0 25px rgba(79, 124, 255, .05);
+            .copy {
+                font-size: 15px;
+            }
+        }
 
-    backdrop-filter: blur(10px);
-}
+        @media (max-width: 900px) {
+            .page {
+                grid-template-columns: minmax(0, 1.3fr) minmax(280px, 1fr);
+            }
 
-.hero-image {
-    width: 100%;
-    height: clamp(150px, 18vh, 220px);
-}
+            .section.with-image {
+                grid-template-columns: minmax(0, 1fr) 150px;
+            }
 
-.hero-caption {
-    margin-top: 8px;
-}
+            .inline-image {
+                width: 150px;
+                height: 210px;
+            }
 
-.caption-title {
-    font-size: 12px;
+            .text-card {
+                grid-template-columns: 1fr;
+            }
 
-    letter-spacing: 2px;
+            .buttons {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
 
-    color: var(--accent-light);
+        @media (max-width: 760px) {
+            body {
+                padding: 8px;
+            }
 
-    margin-bottom: 6px;
-}
+            .page {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
 
-.caption-copy {
-    padding-left: 23px;
+            .left {
+                min-height: auto;
+            }
 
-    font-size: 11px;
+            .right {
+                min-height: auto;
+            }
 
-    line-height: 1.5;
+            .title {
+                margin-bottom: 32px;
+            }
 
-    font-weight: 500;
+            .section.with-image {
+                grid-template-columns: 1fr;
+            }
 
-    color: var(--muted);
-}
+            .section.with-image h2,
+            .section.with-image .copy,
+            .inline-image {
+                grid-column: 1;
+            }
 
-/* ==========================
-   TEXT + NAVIGATION
-========================== */
+            .inline-image {
+                width: 100%;
+                height: 220px;
+            }
 
-.text-card {
-    position: relative;
+            .hero-image {
+                height: 220px;
+            }
 
-    border: 1px solid var(--border);
+            .large-panel {
+                min-height: 260px;
+            }
 
-    min-height: 400px;
+            .footer {
+                margin-top: 12px;
+                min-height: 120px;
+            }
+        }
 
-    padding: 12px 10px;
+        @media (max-width: 420px) {
+            .left,
+            .right {
+                padding: 12px;
+            }
 
-    display: grid;
+            .section {
+                margin-bottom: 26px;
+            }
 
-    grid-template-columns:
-        minmax(0, 1fr)
-        170px;
+            .buttons {
+                grid-template-columns: 1fr;
+            }
 
-    gap: 18px;
+            .nav-button {
+                min-height: 44px;
+            }
 
-    background:
-        rgba(8, 14, 26, .7);
+            .copy {
+                font-size: 13px;
+            }
+        }
 
-    box-shadow:
-        0 0 25px rgba(79, 124, 255, .04);
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
 
-    backdrop-filter: blur(10px);
-}
-
-.side-title {
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    color: var(--accent-light);
-
-    margin-bottom: 18px;
-}
-
-.side-copy {
-    font-size: 13px;
-
-    line-height: 1.55;
-
-    font-weight: 500;
-
-    color: var(--muted);
-
-    white-space: pre-line;
-}
-
-/* ==========================
-   NAVIGATION COLUMN
-========================== */
-
-.buttons {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 7px;
-
-    align-self: stretch;
-}
-
-/* Individual navigation button */
-
-.nav-button {
-    position: relative;
-
-    flex: 1;
-
-    min-height: 48px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 10px 12px;
-
-    border: 1px solid rgba(79, 124, 255, .35);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(79, 124, 255, .10),
-            rgba(79, 124, 255, .025)
-        );
-
-    color: var(--text);
-
-    text-decoration: none;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-
-    transition:
-        .2s ease;
-
-    overflow: hidden;
-}
-
-/* Blue indicator line */
-
-.nav-button::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    width: 3px;
-
-    background: var(--accent);
-
-    opacity: .5;
-
-    transition: .2s;
-}
-
-/* Hover */
-
-.nav-button:hover {
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(79, 124, 255, .28),
-            rgba(79, 124, 255, .08)
-        );
-
-    border-color: var(--accent);
-
-    transform: translateX(-3px);
-
-    box-shadow:
-        0 0 18px rgba(79, 124, 255, .18);
-}
-
-.nav-button:hover::before {
-    opacity: 1;
-
-    box-shadow:
-        0 0 10px rgba(79, 124, 255, .8);
-}
-
-/* Active/current page */
-
-.nav-button.active {
-    background:
-        rgba(79, 124, 255, .22);
-
-    border-color: var(--accent);
-
-    color: var(--accent-light);
-
-    box-shadow:
-        0 0 15px rgba(79, 124, 255, .12);
-}
-
-.nav-button.active::before {
-    opacity: 1;
-}
-
-/* ==========================
-   LARGE LOWER PANEL
-========================== */
-
-.large-panel {
-    position: relative;
-
-    border: 1px solid var(--border);
-
-    flex: 1;
-
-    min-height: 220px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(12, 18, 32, .8),
-            rgba(5, 10, 18, .9)
-        );
-
-    box-shadow:
-        inset 0 0 30px rgba(79, 124, 255, .04);
-}
-
-/* ==========================
-   LARGE SCREENS
-========================== */
-
-@media (min-width: 1400px) {
-
-    body {
-        padding: 18px;
-    }
-
-    .page {
-        min-height: calc(100vh - 36px);
-    }
-
-    .left,
-    .right {
-        min-height: calc(100vh - 36px);
-    }
-
-    .copy {
-        font-size: 16px;
-    }
-
-}
-
-/* ==========================
-   MOBILE
-========================== */
-
-@media (max-width: 760px) {
-
-    body {
-        padding: 8px;
-    }
-
-    .page {
-        grid-template-columns: 1fr;
-
-        min-height: auto;
-    }
-
-    .left,
-    .right {
-        min-height: auto;
-    }
-
-    .title {
-        margin-bottom: 35px;
-    }
-
-    .section.with-image {
-        grid-template-columns: 1fr;
-    }
-
-    .section.with-image h2,
-    .section.with-image .copy,
-    .inline-image {
-        grid-column: 1;
-    }
-
-    .inline-image {
-        width: 100%;
-        height: 210px;
-    }
-
-    .text-card {
-        grid-template-columns: 1fr;
-
-        min-height: auto;
-    }
-
-
-    .buttons {
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 7px;
-    }
-
-    .nav-button {
-        min-height: 55px;
-    }
-
-    .large-panel {
-        min-height: 300px;
-    }
-
-    .footer {
-        margin-top: 15px;
-    }
-
-}
-
-@media (max-width: 420px) {
-
-    .buttons {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-</style>
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <main class="page">
 
-    <!-- ==========================
-         LEFT COLUMN
-    =========================== -->
-
     <section class="left">
 
-        <h1 class="title">
-            OVERVIEW
-        </h1>
-
+        <h1 class="title">OVERVIEW</h1>
 
         <article class="section">
-
-            <h2>
-                SETTING
-            </h2>
+            <h2>SETTING</h2>
 
             <p class="copy">
-                ARES takes place in an alternate reality.<br>
-                The earth we live on, the land it formed, the countries it inherited, and societies established- differ from ours. <br>
-                Taking place in real-time, 30 years in the future- the geopolitic situation continues to escalate, making warfare no longer black & white. <br>
-                Former alliances, neighbors, & century long treaties, all begin to crumble under the weight of the world's struggle to maintain stability. <br>
-            </p>
+                ARES takes place in an alternate reality.
 
+                The earth we live on, the land it formed, the countries it inherited, and societies established differ from ours.
+
+                Taking place in real-time, 30 years in the future, the geopolitical situation continues to escalate, making warfare no longer black and white.
+
+                Former alliances, neighbors, and century-long treaties all begin to crumble under the weight of the world's struggle to maintain stability.
+            </p>
         </article>
 
-
         <article class="section with-image">
-
-            <h2>
-                SUMMARY
-            </h2>
+            <h2>SUMMARY</h2>
 
             <p class="copy">
-            For decades, the world has been shaped by research known as the <i>Hannibal Project.</i> An abandoned space program dating<br>
-            back to the early 1980s. Humanity was ambitious, and looking to the stars. However, disagreements and a<br>
-            heated geopolitical situation halted nearly all of the progress. At the heart of Hannibal was Terbium, a rare earth<br>
-            material capable of producing enormous amounts of magnetic and kinetic energy. What was originally intended to fuel<br>
-            humanity's exploration of the stars, became lost to generations. That was until, the first use of weaponized Terbium.<br><br>
+                For decades, the world has been shaped by research known as the <i>Hannibal Project</i>, an abandoned space program dating back to the early 1980s. Humanity was ambitious and looking to the stars. However, disagreements and a heated geopolitical situation halted nearly all of the progress.
 
-            On April the 9th, 1993 - One of the world's leading powers, the International Trade Federation (ITF), had developed<br>
-            and tested a WMD on the island nation of Eto. This WMD would later be confirmed to be a converted Hannibal rocket.<br>
-            Eto had lost 81% of its population.<br>
-            The world opened its eyes in horror as realization set in: who controlled Terbium, controlled history.<br><br>
+                At the heart of Hannibal was Terbium, a rare earth material capable of producing enormous amounts of magnetic and kinetic energy. What was originally intended to fuel humanity's exploration of the stars became lost to generations. That was until the first use of weaponized Terbium.
 
-            The decades that followed became defined by conflict. The ITF expanded throughout the region, using its control of<br>
-            resources and military technology to establish its influence. Nations formed alliances, proxy wars erupted, and an<br>
-            escalating arms race spread across the Paraq and Atuex regions.<br><br>
-            
-            Naming themselves after the slang for regional pirate origin, known as 'Hollows',<br>
-            In 2018, three northern nations united to form the <i>United Hollow Republic (UHR)</i>, created to protect its members<br>
-            from the growing threat of the ITF and the conflicts spreading throughout the region. What began as a defensive alliance<br>
-            eventually became a major military power. The UHR would enter a cold-war against the ITF for several decades to follow,<br>
-            as it focused on returning any stability it could in the Atuex region.<br>
-                
-            Nearly 20 years later, in 2041- the tension between the two nations would boil. The ITF would declare war on the UHR as it<br>
-            began pressing into the Paraq Ocean east, towards Republic waters. This would mark the start of <i>The Paraq War</i>.<br><br>
+                On April 9th, 1993, one of the world's leading powers, the International Trade Federation (ITF), developed and tested a WMD on the island nation of Eto. This WMD would later be confirmed to be a converted Hannibal rocket.
 
-            The ITF's reach would push East, deep into other nations, taking control and establishing puppet states in its wake.<br>
-            It would take the combined effort of the Republic and several other participating nations over a decade to finally<br>
-            bring the ITF's momentum to a halt.<br><br>
+                Eto had lost 81% of its population.
 
-            In 2052, When the UHR landed on the shores of Shangashi, the ITF's capital city, it would mark<br>
-            the downfall of the Federation, and the end of the ITF.<br><br>
+                The world opened its eyes in horror as realization set in: who controlled Terbium controlled history.
 
-            By 2056, the situation has spiraled far beyond a simple war between nations.<br>
-            False-flag operations, forged enemy communications, covert alliances, stolen research, and deliberately manipulated<br>
-            international relations have turned the world into a web of conflicting interests.<br><br>
+                The decades that followed became defined by conflict. The ITF expanded throughout the region, using its control of resources and military technology to establish its influence. Nations formed alliances, proxy wars erupted, and an escalating arms race spread across the Paraq and Atuex regions.
 
-            And beneath the wars is an even bigger problem: the world's critical resources are running out.<br>
-            The world scrambles to keep itself together as age-old alliances turn on eachother.
+                Naming themselves after the slang for regional pirate origin, known as 'Hollows', in 2018, three northern nations united to form the <i>United Hollow Republic (UHR)</i>, created to protect its members from the growing threat of the ITF and the conflicts spreading throughout the region.
+
+                What began as a defensive alliance eventually became a major military power. The UHR would enter a cold war against the ITF for several decades to follow, as it focused on returning any stability it could to the Atuex region.
+
+                Nearly 20 years later, in 2041, the tension between the two nations would boil. The ITF would declare war on the UHR as it began pressing east into the Paraq Ocean, towards Republic waters. This would mark the start of <i>The Paraq War</i>.
+
+                The ITF's reach would push east, deep into other nations, taking control and establishing puppet states in its wake. It would take the combined effort of the Republic and several other participating nations over a decade to finally bring the ITF's momentum to a halt.
+
+                In 2052, when the UHR landed on the shores of Shangashi, the ITF's capital city, it would mark the downfall of the Federation and the end of the ITF.
+
+                By 2056, the situation has spiraled far beyond a simple war between nations.
+
+                False-flag operations, forged enemy communications, covert alliances, stolen research, and deliberately manipulated international relations have turned the world into a web of conflicting interests.
+
+                And beneath the wars is an even bigger problem: the world's critical resources are running out.
+
+                The world scrambles to keep itself together as age-old alliances turn on each other.
             </p>
 
             <div class="placeholder inline-image">
-
                 <img
                     src="https://www.unitedhollowrepublic.com/images/placeholderIMAGE.png"
-                    alt="Placeholder image"
+                    alt="Overview illustration"
+                    loading="lazy"
                 >
-
             </div>
-
         </article>
-
 
         <article class="section">
-
-            <h2>
-                YOUR ROLE
-            </h2>
+            <h2>YOUR ROLE</h2>
 
             <p class="copy">
-                You participate in this war as a member of the Republic Armed Forces. <br>
-                As a Trooper, you are dispatched to a multitude of operations contributing<br>
-                to the war effort and campaigns.
-            </p>
+                You participate in this war as a member of the Republic Armed Forces.
 
+                As a Trooper, you are dispatched to a multitude of operations contributing to the war effort and campaigns.
+            </p>
         </article>
 
-
         <footer class="footer">
-
-            <div class="footer-title">
-                FOOTER
-            </div>
-
+            <div class="footer-title">UNITED HOLLOW REPUBLIC</div>
         </footer>
 
     </section>
 
-
-    <!-- ==========================
-         RIGHT COLUMN
-    =========================== -->
-
     <aside class="right">
 
-
-        <!-- HERO IMAGE -->
-
         <section class="hero-card">
-
             <div class="placeholder hero-image">
-
                 <img
                     src="https://www.unitedhollowrepublic.com/images/placeholderIMAGE.png"
-                    alt="Placeholder image"
+                    alt="Lore overview"
+                    loading="lazy"
                 >
-
             </div>
 
-
             <div class="hero-caption">
-
-                <div class="caption-title">
-                    IMAGE CAPTION TITLE
-                </div>
+                <div class="caption-title">IMAGE CAPTION TITLE</div>
 
                 <p class="caption-copy">
                     Image caption text describing the image.
                     This is a short supporting description that
                     can be replaced with real content.
                 </p>
-
             </div>
-
         </section>
-
-
-        <!-- TEXT + NAVIGATION -->
 
         <section class="text-card">
 
             <div>
-
-                <div class="side-title">
-                    INFORMATION
-                </div>
+                <div class="side-title">INFORMATION</div>
 
                 <p class="side-copy">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -924,48 +765,19 @@ non metus auctor fringilla.
 Cras mattis consectetur purus sit amet fermentum. Sed posuere
 consectetur est at lobortis.
                 </p>
-
             </div>
 
-
-            <!-- NAVIGATION -->
-
             <nav class="buttons" aria-label="Main navigation">
-
-                <a href="index.html" class="nav-button active">
-                    HOME
-                </a>
-
-                <a href="pages/about.html" class="nav-button">
-                    ABOUT
-                </a>
-
-                <a href="pages/lore.html" class="nav-button">
-                    LORE
-                </a>
-
-                <a href="pages/gallery.html" class="nav-button">
-                    GALLERY
-                </a>
-
-                <a
-                    href="https://discord.gg/UHR"
-                    class="nav-button"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    DISCORD
-                </a>
-
+                <a href="index.html" class="nav-button active" aria-current="page">HOME</a>
+                <a href="pages/about.html" class="nav-button">ABOUT</a>
+                <a href="pages/lore.html" class="nav-button">LORE</a>
+                <a href="pages/gallery.html" class="nav-button">GALLERY</a>
+                <a href="https://discord.gg/UHR" class="nav-button" target="_blank" rel="noopener noreferrer">DISCORD</a>
             </nav>
 
         </section>
 
-
-        <!-- LARGE LOWER PANEL -->
-
-        <section class="large-panel"></section>
-
+        <section class="large-panel" aria-label="Additional information"></section>
 
     </aside>
 

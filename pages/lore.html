@@ -1,269 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lore Hub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-:root {
-    --bg: #0b0f14;
-    --panel: #151c25;
-    --text: #e6e6e6;
-    --muted: #9aa4b2;
-    --accent: #0e0091;
-    --border: #263241;
-}
+    <title>Lore Hub | United Hollow Republic</title>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <meta name="theme-color" content="#0b0f14">
+    <meta name="description" content="Explore the history, factions, locations, arsenal, and intelligence of the United Hollow Republic universe.">
 
-body {
-    font-family: Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-/* HERO */
-.hero {
-    height: 70vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-size: cover;
-    background-position: center;
-}
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: rgba(21, 28, 37, 0.92);
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        rgba(0,0,0,0.55),
-        rgba(0,0,0,0.9)
-    );
-}
+            --text: #e6e6e6;
+            --muted: #9aa4b2;
 
-.hero-content {
-    position: relative;
-    max-width: 900px;
-    padding: 2rem;
-}
+            --accent: #0e0091;
+            --accent-light: #4f7cff;
 
-.hero-title {
-    font-size: 3.2rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 1rem;
-}
+            --border: #263241;
+            --transition: 0.25s ease;
+        }
 
-.hero-desc {
-    color: var(--muted);
-    font-size: 1.1rem;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* NAV */
-nav {
-    position: sticky;
-    top: 0;
-    background: rgba(11,15,20,0.95);
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(10px);
-    z-index: 10;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    list-style: none;
-}
+        body {
+            min-height: 100vh;
 
-nav a {
-    display: block;
-    padding: 1rem 1.2rem;
-    color: var(--text);
-    text-decoration: none;
-    cursor: pointer;
-}
+            font-family: 'Inter', Arial, sans-serif;
 
-nav a:hover {
-    background: var(--accent);
-}
+            background: var(--bg);
+            color: var(--text);
+        }
 
-/* CONTENT */
-main {
-    max-width: 1100px;
-    margin: auto;
-    padding: 2rem;
-}
+        /* Hero */
 
-.section-box {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin-top: 2rem;
-}
-</style>
+        .hero {
+            position: relative;
+
+            min-height: 65vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 4rem 2rem;
+
+            text-align: center;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            transition: background-image 0.3s ease;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0.45),
+                    rgba(11, 15, 20, 0.75) 65%,
+                    var(--bg)
+                );
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+
+            width: 100%;
+            max-width: 900px;
+
+            padding: 2rem;
+        }
+
+        .hero-title {
+            margin-bottom: 1rem;
+
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+
+            letter-spacing: 4px;
+            text-transform: uppercase;
+
+            text-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-desc {
+            max-width: 700px;
+            margin: auto;
+
+            color: var(--muted);
+
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Navigation */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+
+            background: rgba(11, 15, 20, 0.94);
+            backdrop-filter: blur(16px);
+
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 1rem;
+
+            list-style: none;
+        }
+
+        nav a {
+            position: relative;
+
+            display: block;
+
+            padding: 1.2rem 1.3rem;
+
+            color: var(--muted);
+            text-decoration: none;
+
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+
+            transition: var(--transition);
+        }
+
+        nav a::after {
+            content: "";
+
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+
+            width: 0;
+            height: 2px;
+
+            background: var(--accent-light);
+
+            transform: translateX(-50%);
+            transition: var(--transition);
+        }
+
+        nav a:hover,
+        nav a:focus-visible {
+            color: white;
+            background: rgba(79, 124, 255, 0.06);
+        }
+
+        nav a:hover::after,
+        nav a:focus-visible::after {
+            width: 65%;
+        }
+
+        nav a:focus-visible {
+            outline: 2px solid var(--accent-light);
+            outline-offset: -3px;
+        }
+
+        /* Main Content */
+
+        main {
+            width: 100%;
+            max-width: 1150px;
+
+            margin: auto;
+            padding: 3rem 2rem 5rem;
+        }
+
+        .section-box {
+            padding: 2.5rem;
+
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-box h2 {
+            margin-bottom: 1rem;
+
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .section-box p {
+            color: var(--muted);
+
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 50vh;
+                padding: 3rem 1rem;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .hero-title {
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                padding: 0.4rem;
+                gap: 0.2rem;
+            }
+
+            nav a {
+                padding: 0.9rem 0.75rem;
+                font-size: 0.65rem;
+            }
+
+            main {
+                padding: 2rem 1rem 3rem;
+            }
+
+            .section-box {
+                padding: 1.75rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero-desc {
+                font-size: 0.9rem;
+            }
+
+            nav a {
+                padding: 0.75rem 0.55rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<header class="hero" id="hero">
+    <header class="hero" id="hero">
+        <div class="hero-overlay"></div>
 
-    <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" id="heroTitle"></h1>
+            <p class="hero-desc" id="heroDesc"></p>
+        </div>
+    </header>
 
-    <div class="hero-content">
-        <h1 class="hero-title" id="heroTitle"></h1>
-        <p class="hero-desc" id="heroDesc"></p>
-    </div>
+    <nav id="nav" aria-label="Lore categories">
+        <ul>
+            <li>
+                <a href="lore/overview.html"
+                   data-title="Overview"
+                   data-desc="A fragmented world shaped by prolonged conflict and collapsing alliances."
+                   data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                    Overview
+                </a>
+            </li>
 
-</header>
+            <li>
+                <a href="history.html"
+                   data-title="History"
+                   data-desc="Key events leading to the current conflicts."
+                   data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                    History
+                </a>
+            </li>
 
-<!-- NAV -->
-<nav id="nav">
-    <ul>
+            <li>
+                <a href="factions.html"
+                   data-title="Factions"
+                   data-desc="Nations, powers, and groups."
+                   data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                    Factions
+                </a>
+            </li>
 
-        <li>
-            <a href="lore/overview.html"
-               data-title="Overview"
-               data-desc="A fragmented world shaped by prolonged conflict and collapsing alliances."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
-                Overview
-            </a>
-        </li>
+            <li>
+                <a href="locations.html"
+                   data-title="Locations"
+                   data-desc="Key landmarks and warzones."
+                   data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                    Locations
+                </a>
+            </li>
 
-        <li>
-            <a href="history.html"
-               data-title="History"
-               data-desc="Key events leading to the current conflicts."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
-                History
-            </a>
-        </li>
+            <li>
+                <a href="arsenal.html"
+                   data-title="Arsenal"
+                   data-desc="Vehicles, Weapons, & Systems."
+                   data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                    Arsenal
+                </a>
+            </li>
 
-        <li>
-            <a href="factions.html"
-               data-title="Factions"
-               data-desc="Nations, powers, and groups."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
-                Factions
-            </a>
-        </li>
+            <li>
+                <a href="characters.html"
+                   data-title="Characters"
+                   data-desc="Operatives and important individuals."
+                   data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                    Characters
+                </a>
+            </li>
 
-        <li>
-            <a href="locations.html"
-               data-title="Locations"
-               data-desc="Key landmarks and warzones."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
-                Locations
-            </a>
-        </li>
+            <li>
+                <a href="lore/intel.html"
+                   data-title="Intel"
+                   data-desc="Review intel found during events."
+                   data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
+                    Intel
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-        <li>
-            <a href="arsenal.html"
-               data-title="Arsenal"
-               data-desc="Vehicles, Weapons, & Systems."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
-                Arsenal
-            </a>
-        </li>
+    <main>
+        <section class="section-box">
+            <h2>Welcome</h2>
 
-        <li>
-            <a href="characters.html"
-               data-title="Characters"
-               data-desc="Operatives and important individuals."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
-                Characters
-            </a>
-        </li>
+            <p>
+                Use the navigation buttons above to explore the lore.
+            </p>
+        </section>
+    </main>
 
-        <li>
-            <a href="lore/intel.html"
-               data-title="Intel"
-               data-desc="Review intel found during events."
-               data-bg="https://www.unitedhollowrepublic.com/images/maps/placeholderIMAGE.png">
-                Intel
-            </a>
-        </li>
+    <script>
+        const hero = document.getElementById("hero");
+        const heroTitle = document.getElementById("heroTitle");
+        const heroDesc = document.getElementById("heroDesc");
+        const nav = document.getElementById("nav");
 
-    </ul>
-</nav>
+        const defaultState = {
+            title: "Lore Hub",
+            desc: "Select a category below to view lore content.",
+            bg: "https://www.unitedhollowrepublic.com/images/maps/MapBackgroundBlur.png"
+        };
 
-<!-- CONTENT -->
-<main>
+        function setHero(state) {
+            heroTitle.textContent = state.title;
+            heroDesc.textContent = state.desc;
+            hero.style.backgroundImage = `url("${state.bg}")`;
+        }
 
-    <div class="section-box">
-        <h1>Welcome</h1>
+        function previewCategory(link) {
+            setHero({
+                title: link.dataset.title,
+                desc: link.dataset.desc,
+                bg: link.dataset.bg
+            });
+        }
 
-        <p>
-            Use the navigation buttons above to explore the lore.
-        </p>
-    </div>
+        nav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("mouseenter", () => {
+                previewCategory(link);
+            });
 
-</main>
-
-<script>
-
-const hero = document.getElementById("hero");
-const heroTitle = document.getElementById("heroTitle");
-const heroDesc = document.getElementById("heroDesc");
-const nav = document.getElementById("nav");
-
-/* DEFAULT HERO STATE */
-
-const defaultState = {
-    title: "Lore Hub",
-    desc: "Select a category below to view lore content.",
-    bg: "https://www.unitedhollowrepublic.com/images/maps/MapBackgroundBlur.png"
-};
-
-/* SET HERO */
-
-function setHero(state) {
-
-    heroTitle.textContent = state.title;
-    heroDesc.textContent = state.desc;
-
-    hero.style.backgroundImage = `url(${state.bg})`;
-
-}
-
-/* NAV INTERACTIONS */
-
-document.querySelectorAll("nav a").forEach(link => {
-
-    link.addEventListener("mouseenter", () => {
-
-        setHero({
-            title: link.dataset.title,
-            desc: link.dataset.desc,
-            bg: link.dataset.bg
+            link.addEventListener("focus", () => {
+                previewCategory(link);
+            });
         });
 
-    });
+        nav.addEventListener("mouseleave", () => {
+            setHero(defaultState);
+        });
 
-});
+        nav.addEventListener("focusout", event => {
+            if (!nav.contains(event.relatedTarget)) {
+                setHero(defaultState);
+            }
+        });
 
-/* RESET WHEN NOT HOVERING NAV */
-
-nav.addEventListener("mouseleave", () => {
-
-    setHero(defaultState);
-
-});
-
-/* INIT DEFAULT */
-
-setHero(defaultState);
-
-</script>
+        setHero(defaultState);
+    </script>
 
 </body>
 </html>
