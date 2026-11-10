@@ -370,67 +370,72 @@
                 .replace(/\s+-\s+/g, " — ");
         }
 
-        function renderArchive() {
-            const query = searchInput.value.toLowerCase().trim();
+        
+function renderArchive() {
+    const query = searchInput.value.toLowerCase().trim();
 
-            const filtered = documents.filter(document =>
-                document.title.toLowerCase().includes(query)
-            );
+    const filtered = documents.filter(record =>
+        record.title.toLowerCase().includes(query)
+    );
 
-            fileList.replaceChildren();
+    fileList.replaceChildren();
 
-            if (filtered.length === 0) {
-                const empty = document.createElement("div");
-                empty.className = "empty-state";
-                empty.textContent = "No matching records found.";
-                fileList.appendChild(empty);
-                return;
-            }
+    if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No matching records found.";
+        fileList.appendChild(empty);
+        return;
+    }
 
-            filtered.forEach((document, index) => {
-                const link = document.createElement("a");
-                link.className = "file";
-                link.href = "storage/" + encodeURIComponent(document.filename);
-                link.target = "_blank";
-                link.rel = "noopener noreferrer";
+    filtered.forEach((record, index) => {
+        const link = document.createElement("a");
+        link.className = "file";
+        link.href = "storage/" + encodeURIComponent(record.filename);
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
 
-                const top = document.createElement("div");
-                top.className = "file-top";
+        const top = document.createElement("div");
+        top.className = "file-top";
 
-                const id = document.createElement("span");
-                id.className = "file-id";
-                id.textContent = `RECORD-${String(index + 1).padStart(3, "0")}`;
+        const id = document.createElement("span");
+        id.className = "file-id";
+        id.textContent = `RECORD-${String(index + 1).padStart(3, "0")}`;
 
-                const type = document.createElement("span");
-                type.className = "file-type";
-                type.textContent = "PDF DOCUMENT";
+        const type = document.createElement("span");
+        type.className = "file-type";
+        type.textContent = "PDF DOCUMENT";
 
-                top.append(id, type);
+        top.append(id, type);
 
-                const title = document.createElement("h2");
-                title.className = "file-title";
-                title.textContent = document.title;
+        const title = document.createElement("h2");
+        title.className = "file-title";
+        title.textContent = record.title;
 
-                const description = document.createElement("p");
-                description.className = "file-description";
-                description.textContent = "Archived document.";
+        const description = document.createElement("p");
+        description.className = "file-description";
+        description.textContent = "Archived document.";
 
-                const open = document.createElement("span");
-                open.className = "file-open";
-                open.textContent = "Open Record →";
+        const open = document.createElement("span");
+        open.className = "file-open";
+        open.textContent = "Open Record →";
 
-                link.append(top, title, description, open);
-                fileList.appendChild(link);
-            });
-        }
+        link.append(top, title, description, open);
+        fileList.appendChild(link);
+    });
+}
 
+            // function to load from archive
         async function loadArchive() {
             try {
                 const response = await fetch(API_URL);
 
-                if (!response.ok) {
-                    throw new Error(`Archive request failed: ${response.status}`);
-                }
+if (!response.ok) {
+    const details = await response.text();
+    throw new Error(
+        `GitHub API Error ${response.status}: ${details}`
+    );
+}
 
                 const files = await response.json();
 
@@ -454,18 +459,17 @@
                 renderArchive();
 
             } catch (error) {
-                console.error("Archive loading error:", error);
+    console.error("Archive loading error:", error);
 
-                recordCount.textContent = "--";
-                fileList.replaceChildren();
+    recordCount.textContent = "--";
+    fileList.replaceChildren();
 
-                const empty = document.createElement("div");
-                empty.className = "empty-state";
-                empty.textContent =
-                    "Unable to retrieve archive records. Please try again later.";
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = error.message;
 
-                fileList.appendChild(empty);
-            }
+    fileList.appendChild(empty);
+}
         }
 
         searchInput.addEventListener("input", renderArchive);
